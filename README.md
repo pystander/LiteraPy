@@ -25,17 +25,13 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## Changelog
 
-**1.0.1**
-
-- Added pinyin() for pinyin search
-
-<br/>
-
 **1.0.0**
 
 - Supported CEDICT library
 
 - Added ``search( )`` for vocabulary search
+
+- Added pinyin() for pinyin search
 
 <br/>
 
