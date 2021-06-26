@@ -31,7 +31,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Added ``search( )`` for vocabulary search
 
-- Added pinyin() for pinyin search
+- Added ``pinyin()`` for pinyin search
 
 <br/>
 
