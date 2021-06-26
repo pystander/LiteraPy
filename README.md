@@ -1,2 +1,68 @@
 # LiteraPy
-A pure-Python solution for Chinese writing and collocations.
+
+``LiteraPy`` is a pure-Python program dedicated for autofilling Chinese vocabularies and phrases. It is particularly designed to assist students and writers in their writings with matched, suitable word choice.
+
+Please note that this is only my own practice for Python learning as a IT student, and should not be taken as a high-end solution.
+For further enquiries, please feel free to contact me on GitHub via [Issues](https://github.com/pystander/SaltyPy/issues).
+
+<br/>
+
+## Features
+
+- Built on external libraries
+
+- Vocabulary and Pinyin search
+
+- Easy-to-read
+
+<br/>
+
+## Installation
+
+``LiteraPy`` is developed under [Python](https://www.python.org/) 3.7 with following module(s):
+
+<br/>
+
+## Changelog
+
+**1.0.1**
+
+- Added variable ``round``
+
+- Changed default rounds of ``bcrypt.gensalt`` to 15
+
+<br/>
+
+**1.0.1**
+
+- Added pinyin() for pinyin search
+
+<br/>
+
+**1.0.0**
+
+- Supported CEDICT library
+
+- Added ``search( )`` for vocabulary search
+
+<br/>
+
+## To-do List
+  
+- [x] Multiple encryptions and hashing (AES + bcrypt)
+
+- [ ] Time delay and IP block
+
+- [ ] Two-factor Authentication (2FA)
+
+- [ ] Support for Ubuntu and other OS
+
+- [ ] Add support to database file (csv, mdb ...)
+
+- [ ] CAPTCHA
+
+<br/>
+
+## References
+
+[1] [MDBG Chinese Dictionary](https://www.mdbg.net/chinese/dictionary?page=cedict)
