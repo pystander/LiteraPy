@@ -19,19 +19,11 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## Installation
 
-``LiteraPy`` is developed under [Python](https://www.python.org/) 3.7 with following module(s):
+``LiteraPy`` is developed under [Python](https://www.python.org/) 3.7
 
 <br/>
 
 ## Changelog
-
-**1.0.1**
-
-- Added variable ``round``
-
-- Changed default rounds of ``bcrypt.gensalt`` to 15
-
-<br/>
 
 **1.0.1**
 
@@ -44,22 +36,6 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 - Supported CEDICT library
 
 - Added ``search( )`` for vocabulary search
-
-<br/>
-
-## To-do List
-  
-- [x] Multiple encryptions and hashing (AES + bcrypt)
-
-- [ ] Time delay and IP block
-
-- [ ] Two-factor Authentication (2FA)
-
-- [ ] Support for Ubuntu and other OS
-
-- [ ] Add support to database file (csv, mdb ...)
-
-- [ ] CAPTCHA
 
 <br/>
 
