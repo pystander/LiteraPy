@@ -1,3 +1,7 @@
+#!/usr/bin/env Python
+# LiteraPy v1.0.0
+# Copyright (c) 2021 pystander
+
 # Import libraries
 import re
 import codecs
