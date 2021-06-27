@@ -7,6 +7,7 @@ import re
 import codecs
 import gc
 import time
+import types
 from pathlib import Path
 
 # Read CEDICT file
@@ -19,16 +20,21 @@ else:
     print("CEDICT file not found")
     
 # Define functions
-# Match-case will be introduced in Python 3.10
+# Match-case will be introduced in Python 3.10 -> menu()
+def fun():
+    for f in globals().values():
+        if type(f) == types.FunctionType:
+            print(f)
+            
 def search():
     word = input("Search for characters:\n")
     matched = []
     t_start = time.time()
     
-    for line in ce_line:
-        if line.startswith(word):
-            end = line.find(' ')
-            matched.append(line[:end])
+    for i in ce_line:
+        if i.startswith(word):
+            end = i.find(' ')
+            matched.append(i[:end])
             
     count = len(matched)
     if count > 0:
@@ -37,10 +43,10 @@ def search():
         return matched
     else:
         print("No matched record")
-
+        
 def pinyin():
     word = input("Search for pinyin:\n")
-    idx = [ce_line.index(line) for line in ce_line if line.startswith(word + " ")]
+    idx = [ce_line.index(i) for i in ce_line if i.startswith(word + " ")]
     pylist = []
     t_start = time.time()
     
@@ -56,3 +62,4 @@ def pinyin():
         return pylist
     else:
         print("No matched record")
+        
