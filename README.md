@@ -29,11 +29,11 @@ No external package or library is required to run the program.
 
 **1.0.3**
 
-- Added ``nodup()`` for removing duplicated list elements
+- Added ``nodup(dup_list)`` for removing duplicates from list
 
 - Fixed errors on matching ``search()`` zh-CHT results
 
-- Supported multi-character Pinyin search
+- Supported multi-character search for ``pinyin()``
 
 **1.0.2**
 
