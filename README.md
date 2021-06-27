@@ -27,7 +27,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 **1.0.0**
 
-- Supported CEDICT library
+- Supported [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict) Utf-8 library
 
 - Added ``search( )`` for vocabulary search
 
