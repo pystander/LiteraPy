@@ -55,7 +55,7 @@ No external package or library is required to run the program.
 
 - [ ] Pinyin search for Phrases
 
-- [ ] AI training for word suggestions and Chinese part of speech identifier (主 謂 賓 定 狀 補)
+- [ ] AI with word suggestions and identifier for Chinese part of speech (主 謂 賓 定 狀 補)
 
 - [ ] More languages to be supported
 
