@@ -34,16 +34,16 @@ def search():
     
     for i in ce_line:
         start = i.find(' ') + 1
-
+        
         if i.startswith(word):
             start = i.find(' ') + 1
             matched.append(i[:start])
-            
         elif word == i[start:start+size]:
             end = start + i[start:].find(' ')
             matched.append(i[start:end])
             
     count = len(matched)
+    
     if count > 0:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
@@ -63,6 +63,7 @@ def pinyin():
             matched.append(i[start:end])
             
     count = len(matched)
+    
     if count > 0:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
