@@ -61,9 +61,9 @@ No external package or library is required to run the program.
 
 ## To-do List
 
-- ~~Multi-character Pinyin search~~ (achieved in v1.0.3)
+~~- Multi-character Pinyin search~~ Achieved in v1.0.3 (See [Minimalist Release](https://github.com/pystander/LiteraPy/releases/tag/1.0.3))
 
-- AI with word suggestions and identifier for Chinese part of speech (主 謂 賓 定 狀 補)
+- AI with word suggestions and identifier for Chinese part of speech (主謂賓 定狀補)
 
 - More languages to be supported
 
