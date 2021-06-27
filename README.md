@@ -29,11 +29,11 @@ No external package or library is required to run the program.
 
 **1.0.2**
 
-- Removed class ``Language`` and related functions
-
 - Optimized ``search()`` and ``pinyin()``
 
-- Supported Traditional Chinese and Simpified Chinese for ``search()`` and ``pinyin()``
+- Supported both Traditional and Simplified Chinese for ``search()`` and ``pinyin()``
+
+- Removed class ``Language`` for optimization
 
 **1.0.1**
 
