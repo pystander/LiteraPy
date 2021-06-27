@@ -9,7 +9,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## Features
 
-- Built on external libraries
+- Currently built on [MDBG CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict)
 
 - Vocabulary and Pinyin search
 
