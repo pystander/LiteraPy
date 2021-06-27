@@ -5,7 +5,6 @@
 # Import libraries
 import re
 import codecs
-import gc
 import time
 import types
 from pathlib import Path
@@ -19,10 +18,9 @@ if Path('cedict_ts.u8').is_file():
 else:
     print("CEDICT file not found")
 
-# Match-case will be introduced in Python 3.10
-# menu() to be added
-
 # Define functions
+# Match-case will be introduced in Python 3.10 -> menu() to be added
+
 def fun():
     for f in globals().values():
         if type(f) == types.FunctionType:
@@ -86,3 +84,8 @@ def pinyin():
         return result
     else:
         print("No matched record")
+        
+def clause(sentence):
+    raw = re.split('，|。|；|：「|」|？',sentence)
+    clause = list(filter(None,raw))
+    return clause
