@@ -28,14 +28,20 @@ def fun():
 # Match-case will be introduced in Python 3.10 -> menu()
 def search():
     word = input("Search for related vocabularies:\n")
+    size = len(word)
     matched = []
     t_start = time.time()
     
     for i in ce_line:
-        if word in i:
-            start = i.find(word)
-            end = i[start:].find(' ')
-            matched.append(i[start:start+end])
+        start = i.find(' ') + 1
+
+        if i.startswith(word):
+            start = i.find(' ') + 1
+            matched.append(i[:start])
+            
+        elif word == i[start:start+size]:
+            end = start + i[start:].find(' ')
+            matched.append(i[start:end])
             
     count = len(matched)
     if count > 0:
@@ -46,15 +52,15 @@ def search():
         print("No matched record")
         
 def pinyin():
-    word = input("Search for pinyin:\n")
+    ch = input("Search pinyin of single character:\n")
     matched = []
     t_start = time.time()
     
     for i in ce_line:
-        if word + ' ' == i[0:2] or ' ' + word + ' ' == i[1:4]:
-            start = i.find('[')
+        if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
+            start = i.find('[') + 1
             end = i.find(']')
-            matched.append(i[start+1:end])
+            matched.append(i[start:end])
             
     count = len(matched)
     if count > 0:
