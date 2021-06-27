@@ -13,7 +13,9 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Vocabulary and Pinyin search
 
-- Optimization for speed (t < 0.09s per character search)
+- Optimization for clarity and efficiency
+
+- Search time < 0.09 s per character
 
 <br/>
 
