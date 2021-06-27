@@ -37,13 +37,13 @@ def search():
         
         # zh-CHT
         if i.startswith(word):
-            matched.append(i[:start])
+            matched.append(i[:start-1])
             
-        # zh-CHS    
+        # zh-CHS
         if word == i[start:start+size]:
             end = start + i[start:].find(' ')
             matched.append(i[start:end])
-
+            
     result = nodup(matched)
     count = len(result)
     
@@ -72,8 +72,9 @@ def pinyin():
             if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
                 start = i.find('[') + 1
                 end = i.find(']')
-                matched.append(i[start:end])
-
+                if ch not in matched:
+                    matched.append(i[start:end])
+                    
     result = nodup(matched)
     count = len(result)
     
@@ -84,12 +85,6 @@ def pinyin():
     else:
         print("No matched record")
         
-def nodup(long_list):
-    temp = []
+def nodup(dup_list):
+    return list(dict.fromkeys(dup_list))
     
-    for i in long_list:
-        if i not in temp:
-            temp.append(i)
-            
-    long_list = temp
-    return long_list
