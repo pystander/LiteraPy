@@ -38,3 +38,5 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 ## References
 
 [1] [MDBG Chinese Dictionary](https://www.mdbg.net/chinese/dictionary?page=cedict)
+
+[2] [CC-CEDICT Home [CC-CEDICT WIKI]](https://cc-cedict.org/wiki/)
