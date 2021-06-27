@@ -1,5 +1,5 @@
 #!/usr/bin/env Python
-# LiteraPy v1.0.1
+# LiteraPy v1.0.2
 # Copyright (c) 2021 pystander
 
 # Import libraries
@@ -19,22 +19,6 @@ if Path('cedict_ts.u8').is_file():
 else:
     print("CEDICT file not found")
 
-# Classes
-class Language:
-    zh = 'zh-CHT' # Default as traditional Chinese
-    
-    def lang():
-        code = input("Enter language code (zh-CHT, zh-CHS): ")
-        
-        if code == 'zh-CHT':
-            Language.zh = code
-            print("Language changed to zh_CHT")
-        elif code == 'zh-CHS':
-            Language.zh = code
-            print("Language changed to zh_CHS")
-        else:
-            print("Language code not available")
-
 # Define functions
 def fun():
     for f in globals().values():
@@ -43,21 +27,16 @@ def fun():
 
 # Match-case will be introduced in Python 3.10 -> menu()
 def search():
-    word = input("Search for characters:\n")
+    word = input("Search for related vocabularies:\n")
     matched = []
     t_start = time.time()
-
-    if Language.zh == 'zh-CHT':
-        for i in ce_line:
-            if i.startswith(word):
-                mesh = i.split(' ')
-                matched.append(mesh[0])
-    elif Language.zh == 'zh-CHS':
-        for i in ce_line:
-            if i.startswith(word):
-                mesh = i.split(' ')
-                matched.append(mesh[1])
-                
+    
+    for i in ce_line:
+        if word in i:
+            start = i.find(word)
+            end = i[start:].find(' ')
+            matched.append(i[start:start+end])
+            
     count = len(matched)
     if count > 0:
         interval = '{0:.3f}'.format(time.time() - t_start)
@@ -84,4 +63,4 @@ def pinyin():
         return pylist
     else:
         print("No matched record")
-        
+    
