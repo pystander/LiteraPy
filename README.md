@@ -31,6 +31,8 @@ No external package or library is required to run the program.
 
 - Added ``nodup()`` for removing duplicated list elements
 
+- Fixed errors on matching ``search()`` zh-CHT results
+
 - Supported multi-character Pinyin search
 
 **1.0.2**
