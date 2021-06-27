@@ -27,6 +27,12 @@ No external package or library is required to run the program.
 
 ## Changelog
 
+**1.0.3**
+
+- Added ``nodup()`` for removing duplicated list elements
+
+- Supported multi-character Pinyin search for ``pinyin()``
+
 **1.0.2**
 
 - Optimized ``search()`` and ``pinyin()``
@@ -52,8 +58,6 @@ No external package or library is required to run the program.
 <br/>
 
 ## To-do List
-
-- [ ] Pinyin search for phrases
 
 - [ ] AI with word suggestions and identifier for Chinese part of speech (主 謂 賓 定 狀 補)
 
