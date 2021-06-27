@@ -1,5 +1,5 @@
 #!/usr/bin/env Python
-# LiteraPy v1.0.2
+# LiteraPy v1.0.3
 # Copyright (c) 2021 pystander
 
 # Import libraries
@@ -43,32 +43,53 @@ def search():
         if word == i[start:start+size]:
             end = start + i[start:].find(' ')
             matched.append(i[start:end])
-            
-    count = len(matched)
+
+    result = nodup(matched)
+    count = len(result)
     
     if count > 0:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
-        return matched
+        return result
     else:
         print("No matched record")
         
 def pinyin():
-    ch = input("Search Pinyin for single character:\n")
+    word = input("Search Pinyin for character(s):\n")
+    char =[]
     matched = []
     t_start = time.time()
     
-    for i in ce_line:
-        if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
-            start = i.find('[') + 1
-            end = i.find(']')
-            matched.append(i[start:end])
-            
-    count = len(matched)
+    # Split word into characters
+    for i in word:
+        char.append(i)
+        
+    # Perform Pinyin search per character
+    for n in range(len(char)):
+        ch = char[n]
+        
+        for i in ce_line:
+            if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
+                start = i.find('[') + 1
+                end = i.find(']')
+                matched.append(i[start:end])
+
+    result = nodup(matched)
+    count = len(result)
     
     if count > 0:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
-        return matched
+        return result
     else:
         print("No matched record")
+        
+def nodup(long_list):
+    temp = []
+    
+    for i in long_list:
+        if i not in temp:
+            temp.append(i)
+            
+    long_list = temp
+    return long_list
