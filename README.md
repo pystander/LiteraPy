@@ -13,7 +13,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Vocabulary and Pinyin search
 
-- Easy-to-read
+- Optimization for speed (t < 0.09s per character search)
 
 <br/>
 
