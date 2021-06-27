@@ -25,11 +25,19 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## Changelog
 
+**1.0.1**
+
+- Added ``Language.lang()`` for language settings
+
+- Added ``fun()`` for functions
+
+- Supported ``zh-CHT`` and ``zh-CHS`` language for ``search()``
+
 **1.0.0**
 
 - Supported [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict) Utf-8 library
 
-- Added ``search( )`` for vocabulary search
+- Added ``search()`` for vocabulary search
 
 - Added ``pinyin()`` for pinyin search
 
