@@ -18,13 +18,13 @@ if Path('cedict_ts.u8').is_file():
     print("CEDICT loaded")
 else:
     print("CEDICT file not found")
-
+    
 # Define functions
 def fun():
     for f in globals().values():
         if type(f) == types.FunctionType:
             print(f)
-
+            
 # Match-case will be introduced in Python 3.10 -> menu()
 def search():
     word = input("Search for related vocabularies:\n")
@@ -35,10 +35,13 @@ def search():
     for i in ce_line:
         start = i.find(' ') + 1
         
+        # zh-CHT
         if i.startswith(word):
             start = i.find(' ') + 1
             matched.append(i[:start])
-        elif word == i[start:start+size]:
+            
+        # zh-CHS    
+        if word == i[start:start+size]:
             end = start + i[start:].find(' ')
             matched.append(i[start:end])
             
@@ -52,7 +55,7 @@ def search():
         print("No matched record")
         
 def pinyin():
-    ch = input("Search pinyin of single character:\n")
+    ch = input("Search Pinyin for single character:\n")
     matched = []
     t_start = time.time()
     
