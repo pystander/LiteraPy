@@ -47,13 +47,13 @@ No external package or library is required to run the program.
 
 - Added ``search()`` for vocabulary search
 
-- Added ``pinyin()`` for single character pinyin search
+- Added ``pinyin()`` for single character Pinyin search
 
 <br/>
 
 ## To-do List
 
-- [ ] Pinyin search for Phrases
+- [ ] Pinyin search for phrases
 
 - [ ] AI with word suggestions and identifier for Chinese part of speech (主 謂 賓 定 狀 補)
 
