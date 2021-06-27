@@ -56,6 +56,3 @@ def pinyin():
         return pylist
     else:
         print("No matched record")
-    
-def release():
-    gc.collect()
