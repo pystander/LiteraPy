@@ -37,7 +37,6 @@ def search():
         
         # zh-CHT
         if i.startswith(word):
-            start = i.find(' ') + 1
             matched.append(i[:start])
             
         # zh-CHS    
