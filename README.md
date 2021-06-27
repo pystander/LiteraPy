@@ -27,6 +27,14 @@ No external package or library is required to run the program.
 
 ## Changelog
 
+**1.0.2**
+
+- Removed class ``Language`` and related functions
+
+- Optimized ``search()`` for compatibility
+
+- Supported Traditional Chinese and Simpified Chinese for ``search()``
+
 **1.0.1**
 
 - Added ``Language.lang()`` for language settings
