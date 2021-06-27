@@ -18,14 +18,16 @@ if Path('cedict_ts.u8').is_file():
     print("CEDICT loaded")
 else:
     print("CEDICT file not found")
-    
+
+# Match-case will be introduced in Python 3.10
+# menu() to be added
+
 # Define functions
 def fun():
     for f in globals().values():
         if type(f) == types.FunctionType:
             print(f)
             
-# Match-case will be introduced in Python 3.10 -> menu()
 def search():
     word = input("Search for related vocabularies:\n")
     size = len(word)
@@ -44,7 +46,7 @@ def search():
             end = start + i[start:].find(' ')
             matched.append(i[start:end])
             
-    result = nodup(matched)
+    result = list(dict.fromkeys(matched))
     count = len(result)
     
     if count > 0:
@@ -75,7 +77,7 @@ def pinyin():
                 if ch not in matched:
                     matched.append(i[start:end])
                     
-    result = nodup(matched)
+    result = list(dict.fromkeys(matched))
     count = len(result)
     
     if count > 0:
@@ -84,6 +86,3 @@ def pinyin():
         return result
     else:
         print("No matched record")
-        
-def nodup(dup_list):
-    return list(dict.fromkeys(dup_list))
