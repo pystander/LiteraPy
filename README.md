@@ -31,9 +31,9 @@ No external package or library is required to run the program.
 
 - Removed class ``Language`` and related functions
 
-- Optimized ``search()`` for compatibility
+- Optimized ``search()`` and ``pinyin()``
 
-- Supported Traditional Chinese and Simpified Chinese for ``search()``
+- Supported Traditional Chinese and Simpified Chinese for ``search()`` and ``pinyin()``
 
 **1.0.1**
 
