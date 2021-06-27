@@ -41,15 +41,13 @@ No external package or library is required to run the program.
 
 - Added ``fun()`` for functions
 
-- Supported ``zh-CHT`` and ``zh-CHS`` language for ``search()``
-
 **1.0.0**
 
 - Supported [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict) Utf-8 library
 
 - Added ``search()`` for vocabulary search
 
-- Added ``pinyin()`` for pinyin search
+- Added ``pinyin()`` for single character pinyin search
 
 <br/>
 
