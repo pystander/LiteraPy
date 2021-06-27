@@ -25,40 +25,6 @@ No external package or library is required to run the program.
 
 <br/>
 
-## Changelog
-
-**1.0.3**
-
-- Added ``nodup(dup_list)`` for removing duplicates from list
-
-- Fixed errors on matching ``search()`` zh-CHT results
-
-- Supported multi-character search for ``pinyin()``
-
-**1.0.2**
-
-- Optimized ``search()`` and ``pinyin()``
-
-- Supported both Traditional and Simplified Chinese for ``search()`` and ``pinyin()``
-
-- Removed class ``Language`` for optimization
-
-**1.0.1**
-
-- Added ``Language.lang()`` for language settings
-
-- Added ``fun()`` for functions
-
-**1.0.0**
-
-- Built on [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict) Utf-8 library
-
-- Added ``search()`` for vocabulary search
-
-- Added ``pinyin()`` for single character Pinyin search
-
-<br/>
-
 ## To-do List
 
 - [x] Multi-character Pinyin search -> v1.0.3 (See [Minimalist Release](https://github.com/pystander/LiteraPy/releases/tag/1.0.3))
