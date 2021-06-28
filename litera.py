@@ -11,7 +11,8 @@ from pathlib import Path
 
 # Read CEDICT file
 if Path('cedict_ts.u8').is_file():
-        cedict = [line.rstrip('\n') for line in open('cedict_ts.u8','r',encoding='utf-8')]
+    with open('cedict_ts.u8','r',encoding='utf-8') as f:
+        cedict = [line.rstrip('\n') for line in f]
         print("CEDICT loaded")
 else:
     print("CEDICT file not found")
@@ -42,11 +43,11 @@ def search():
             end = start + i[start:].find(' ')
             matched.append(i[start:end])
             
-    result = list(dict.fromkeys(matched))
+    result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
     
     if count > 0:
-        interval = '{0:.3f}'.format(time.time() - t_start)
+        interval = '{0:.4f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
@@ -73,17 +74,12 @@ def pinyin():
                 if ch not in matched:
                     matched.append(i[start:end])
                     
-    result = list(dict.fromkeys(matched))
+    result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
     
     if count > 0:
-        interval = '{0:.3f}'.format(time.time() - t_start)
+        interval = '{0:.4f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
         print("No matched record")
-        
-def clause(sentence):
-    raw = re.split('，|。|；|？|！|：|「|」|『|』',sentence)
-    clause = list(filter(None,raw))
-    return clause
