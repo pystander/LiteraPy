@@ -11,13 +11,12 @@ from pathlib import Path
 
 # Read CEDICT file
 if Path('cedict_ts.u8').is_file():
-    ce_txt = open('cedict_ts.u8','r',encoding='utf-8')
-    ce_line = [line.rstrip('\n') for line in ce_txt]
-    ce_dict = list(ce_line)
-    print("CEDICT loaded")
+        ce_txt = open('cedict_ts.u8','r',encoding='utf-8')
+        ce_line = [line.rstrip('\n') for line in f]
+        print("CEDICT loaded")
 else:
     print("CEDICT file not found")
-
+    
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 
@@ -27,12 +26,12 @@ def fun():
             print(f)
             
 def search():
-    word = input("Search for related vocabularies:\n")
+    word = input("Search collocations for character(s):\n")
     size = len(word)
     matched = []
     t_start = time.time()
     
-    for i in ce_line:
+    for i in cedict:
         start = i.find(' ') + 1
         
         # zh-CHT
@@ -68,7 +67,7 @@ def pinyin():
     for n in range(len(char)):
         ch = char[n]
         
-        for i in ce_line:
+        for i in cedict:
             if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
                 start = i.find('[') + 1
                 end = i.find(']')
@@ -86,6 +85,6 @@ def pinyin():
         print("No matched record")
         
 def clause(sentence):
-    raw = re.split('，|。|；|：「|」|？',sentence)
+    raw = re.split('，|。|；|？|！|：|「|」|『|』',sentence)
     clause = list(filter(None,raw))
     return clause
