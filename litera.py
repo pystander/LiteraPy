@@ -17,9 +17,18 @@ if Path('cedict_ts.u8').is_file():
 else:
     print("CEDICT file not found")
     
+class Setting:
+    language = 'zh-CHT'
+    
+    def lang(code: str):
+        if code == 'zh-CHT':
+            Setting.language = code
+        elif code == 'zh-CHS':
+            Setting.language = code
+        print("Language changed to: " + Setting.language)
+        
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
-
 def fun():
     for f in globals().values():
         if type(f) == types.FunctionType:
@@ -35,14 +44,16 @@ def search():
         start = i.find(' ') + 1
         
         # zh-CHT
-        if i.startswith(word):
-            matched.append(i[:start-1])
-            
+        if Setting.language == 'zh-CHT':
+            if i.startswith(word):
+                matched.append(i[:start-1])
+                
         # zh-CHS
-        if word == i[start:start+size]:
-            end = start + i[start:].find(' ')
-            matched.append(i[start:end])
-            
+        elif Setting.language == 'zh-CHS':
+            if word == i[start:start+size]:
+                end = start + i[start:].find(' ')
+                matched.append(i[start:end])
+                
     result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
     
