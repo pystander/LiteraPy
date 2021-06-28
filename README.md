@@ -9,7 +9,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## Features
 
-- Built on external libraries (Currently based on [MDBG CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict))
+- Built on external libraries (Currently based on [MDBG CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict) and [開放詞典](https://kaifangcidian.com/xiazai/))
 
 - Vocabulary and Pinyin search
 
@@ -46,3 +46,5 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 [1] [MDBG Chinese Dictionary](https://www.mdbg.net/chinese/dictionary?page=cedict)
 
 [2] [CC-CEDICT Home [CC-CEDICT WIKI]](https://cc-cedict.org/wiki/)
+
+[3] [開放詞典](https://kaifangcidian.com/xiazai/)
