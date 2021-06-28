@@ -16,16 +16,50 @@ if Path('cedict_ts.u8').is_file():
         print("CEDICT loaded")
 else:
     print("CEDICT file not found")
-    
+
+# Supported language codes
+supported = ['zh-CHT','zh-CHS']
+
+# Classes
 class Setting:
-    language = 'zh-CHT'
+    language = ['zh-CHT']
     
-    def lang(code: str):
-        if code == 'zh-CHT':
-            Setting.language = code
-        elif code == 'zh-CHS':
-            Setting.language = code
-        print("Language changed to: " + Setting.language)
+    def addlang():
+        print("Supported language code: ")
+        print(supported)
+        
+        code = input("Enter language code to be added: \n")
+        
+        if code in supported:
+            if code == 'zh-CHT':
+                if code not in Setting.language:
+                    Setting.language.append(code)
+                    print("Language changed to: ")
+                    print(Setting.language)
+                else:
+                    print("Language existed")
+                    
+            elif code == 'zh-CHS':
+                if code not in Setting.language:
+                    Setting.language.append(code)
+                    print("Language changed to: ")
+                    print(Setting.language)
+                else:
+                    print("Language existed")
+        else:
+            print("Language not supported")
+
+    def dellang():
+        print("Current language setting: ")
+        print(Setting.language)
+        
+        code = input("Enter language code to be hidden: \n")
+        if code in Setting.language:
+            Setting.language.remove(code)
+            print("Language changed to: ")
+            print(Setting.language)
+        else:
+            print("Language not found in setting")
         
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
@@ -35,7 +69,7 @@ def fun():
             print(f)
             
 def search():
-    word = input("Search collocations for character(s):\n")
+    word = input("Search collocations for character(s): \n")
     size = len(word)
     matched = []
     t_start = time.time()
@@ -44,12 +78,12 @@ def search():
         start = i.find(' ') + 1
         
         # zh-CHT
-        if Setting.language == 'zh-CHT':
+        if 'zh-CHT' in Setting.language:
             if i.startswith(word):
                 matched.append(i[:start-1])
                 
         # zh-CHS
-        elif Setting.language == 'zh-CHS':
+        if 'zh-CHS' in Setting.language:
             if word == i[start:start+size]:
                 end = start + i[start:].find(' ')
                 matched.append(i[start:end])
@@ -65,7 +99,7 @@ def search():
         print("No matched record")
         
 def pinyin():
-    word = input("Search Pinyin for character(s):\n")
+    word = input("Search Pinyin for character(s): \n")
     char =[]
     matched = []
     t_start = time.time()
