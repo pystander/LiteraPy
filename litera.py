@@ -47,7 +47,7 @@ def search():
     count = len(result)
     
     if count > 0:
-        interval = '{0:.4f}'.format(time.time() - t_start)
+        interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
@@ -78,7 +78,7 @@ def pinyin():
     count = len(result)
     
     if count > 0:
-        interval = '{0:.4f}'.format(time.time() - t_start)
+        interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
