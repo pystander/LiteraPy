@@ -22,6 +22,7 @@ supported = ['zh-CHT','zh-CHS']
 
 # Classes
 class Setting:
+    # Default language = ['zh-CHT']
     language = ['zh-CHT']
     
     def addlang():
