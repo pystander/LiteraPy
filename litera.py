@@ -80,21 +80,21 @@ def search():
     size = len(word)
     matched = []
     t_start = time.time()
-
-    # CEDICT
-    for i in cedict:
-        start = i.find(' ') + 1
-        
-        # zh-CHT
-        if 'zh-CHT' in Setting.language:
-            if i.startswith(word):
-                matched.append(i[:start-1])
-                
-        # zh-CHS
-        if 'zh-CHS' in Setting.language:
-            if word == i[start:start+size]:
-                end = start + i[start:].find(' ')
-                matched.append(i[start:end])
+    
+#    # CEDICT
+#    for i in cedict:
+#        start = i.find(' ') + 1
+#        
+#        # zh-CHT
+#        if 'zh-CHT' in Setting.language:
+#            if i.startswith(word):
+#                matched.append(i[:start-1])
+#                
+#        # zh-CHS
+#        if 'zh-CHS' in Setting.language:
+#            if word == i[start:start+size]:
+#                end = start + i[start:].find(' ')
+#                matched.append(i[start:end])
 
     # Cidian
     for i in cidian:
@@ -141,13 +141,6 @@ def pinyin():
                 end = i.find(']')
                 if ch not in matched:
                     matched.append(i[start:end])
-                    
-        for i in cidian:
-            if i.startswith(ch + '\t') or '\t' + ch + '\t' in i:
-                start = i.find('\t') + 1
-                end = i[start:].find('\t')
-                if ch not in matched:
-                    matched.append(i[end:])
                     
     result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
