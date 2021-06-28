@@ -11,8 +11,7 @@ from pathlib import Path
 
 # Read CEDICT file
 if Path('cedict_ts.u8').is_file():
-        ce_txt = open('cedict_ts.u8','r',encoding='utf-8')
-        ce_line = [line.rstrip('\n') for line in f]
+        cedict = [line.rstrip('\n') for line in open('cedict_ts.u8','r',encoding='utf-8')]
         print("CEDICT loaded")
 else:
     print("CEDICT file not found")
