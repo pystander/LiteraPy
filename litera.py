@@ -16,8 +16,14 @@ if Path('cedict_ts.u8').is_file():
         print("CEDICT loaded")
 else:
     print("CEDICT file not found")
-
-# Supported language codes
+    
+# Read Cidian file
+if Path('cidian_zhzh-kfcd-2021524.txt').is_file():
+    with open('cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
+        cidian = [line.rstrip('\n') for line in f]
+        print("Cidian loaded")
+        
+# Default variables
 supported = ['zh-CHT','zh-CHS']
 
 # Classes
@@ -61,7 +67,7 @@ class Setting:
             print(Setting.language)
         else:
             print("Language not found in setting")
-        
+
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def fun():
@@ -74,7 +80,8 @@ def search():
     size = len(word)
     matched = []
     t_start = time.time()
-    
+
+    # CEDICT
     for i in cedict:
         start = i.find(' ') + 1
         
@@ -87,6 +94,21 @@ def search():
         if 'zh-CHS' in Setting.language:
             if word == i[start:start+size]:
                 end = start + i[start:].find(' ')
+                matched.append(i[start:end])
+
+    # Cidian
+    for i in cidian:
+        start = i.find('\t') + 1
+        
+        # zh-CHT
+        if 'zh-CHT' in Setting.language:
+            if i.startswith(word):
+                matched.append(i[:start-1])
+                
+        # zh-CHS
+        if 'zh-CHS' in Setting.language:
+            if word == i[start:start+size]:
+                end = start + i[start:].find('\t')
                 matched.append(i[start:end])
                 
     result = list(filter(None, list(dict.fromkeys(matched))))
@@ -119,6 +141,13 @@ def pinyin():
                 end = i.find(']')
                 if ch not in matched:
                     matched.append(i[start:end])
+                    
+        for i in cidian:
+            if i.startswith(ch + '\t') or '\t' + ch + '\t' in i:
+                start = i.find('\t') + 1
+                end = i[start:].find('\t')
+                if ch not in matched:
+                    matched.append(i[end:])
                     
     result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
