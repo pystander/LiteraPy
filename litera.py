@@ -28,11 +28,13 @@ supported = ['zh-CHT','zh-CHS']
 
 # Classes
 class Setting:
-    language = 'zh-CHT'
+    language = 'zh-CHT' # Default language as 'zh-CHT'
     
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def fun():
+    function = []
+    
     for f in globals().values():
         if type(f) == types.FunctionType:
             print(f)
@@ -89,18 +91,33 @@ def adsearch():
     matched = []
     t_start = time.time()
     
+#    # CEDICT
+#    for i in cedict:
+#        start = i.find(' ') + 1
+#        
+#        # zh-CHT
+#        if Setting.language == 'zh-CHT':
+#           if word in i:
+#                matched.append(i[:start-1])
+#        
+#        # zh-CHS
+#        if Setting.language == 'zh-CHS':
+#            if word in i:
+#                end = start + i[start:].find(' ')
+#                matched.append(i[start:end])
+    
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
         
         # zh-CHT
         if Setting.language == 'zh-CHT':
-            if i.startswith(word) or word in i:
+            if word in i:
                 matched.append(i[:start-1])
                 
         # zh-CHS
         if Setting.language == 'zh-CHS':
-            if word == i[start:start+size] or word in i:
+            if word in i:
                 end = start + i[start:].find('\t')
                 matched.append(i[start:end])
                 
