@@ -152,4 +152,3 @@ def lang():
             print("Language changed to: " + Setting.language)
     else:
         print("Language not supported")
-        
