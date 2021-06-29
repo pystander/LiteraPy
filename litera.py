@@ -139,7 +139,7 @@ def pinyin():
     
     for ch in word:
         for i in cedict:
-            if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
+            if i.startswith(ch + ' ') or ' ' + ch + ' ' == i[1:4]:
                 start = i.find('[') + 1
                 end = i.find(']')
                 matched.append(i[start:end])
