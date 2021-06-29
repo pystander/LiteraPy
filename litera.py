@@ -23,7 +23,7 @@ if Path('dict/cidian_zhzh-kfcd-2021524.txt').is_file():
         cidian = [line.rstrip('\n') for line in f]
         print("Cidian loaded")
         
-# Default variables
+# Supported languages
 supported = ['zh-CHT','zh-CHS']
 
 # Classes
@@ -57,7 +57,7 @@ def search():
 #            if word == i[start:start+size]:
 #                end = start + i[start:].find(' ')
 #                matched.append(i[start:end])
-
+    
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
@@ -83,22 +83,46 @@ def search():
     else:
         print("No matched record")
         
+def adsearch():
+    word = input("Advanced search for character(s): \n")
+    size = len(word)
+    matched = []
+    t_start = time.time()
+    
+    # Cidian
+    for i in cidian:
+        start = i.find('\t') + 1
+        
+        # zh-CHT
+        if Setting.language == 'zh-CHT':
+            if i.startswith(word) or word in i:
+                matched.append(i[:start-1])
+                
+        # zh-CHS
+        if Setting.language == 'zh-CHS':
+            if word == i[start:start+size] or word in i:
+                end = start + i[start:].find('\t')
+                matched.append(i[start:end])
+                
+    result = list(filter(None, list(dict.fromkeys(matched))))
+    count = len(result)
+    
+    if count > 0:
+        interval = '{0:.3f}'.format(time.time() - t_start)
+        print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
+        return result
+    else:
+        print("No matched record")
+        
 def pinyin():
     word = input("Search Pinyin for character(s): \n")
     char =[]
     matched = []
     t_start = time.time()
     
-    # Split word into characters
-    for i in word:
-        char.append(i)
-        
-    # Perform Pinyin search per character
-    for n in range(len(char)):
-        ch = char[n]
-        
+    for ch in word:
         for i in cedict:
-            if i.startswith(ch + ' '):
+            if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
                 start = i.find('[') + 1
                 end = i.find(']')
                 matched.append(i[start:end])
@@ -112,10 +136,9 @@ def pinyin():
         return result
     else:
         print("No matched record")
-
+        
 def lang():
-    print("Supported language code: ")
-    print(supported)
+    print("Supported language code: " + str(supported))
     
     code = input("Enter preferred language code: \n")
     
