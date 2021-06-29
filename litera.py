@@ -28,46 +28,8 @@ supported = ['zh-CHT','zh-CHS']
 
 # Classes
 class Setting:
-    # Default language = ['zh-CHT']
-    language = ['zh-CHT']
+    language = 'zh-CHT'
     
-    def lang():
-        print("Supported language code: ")
-        print(supported)
-        
-        code = input("Enter language code to be added: \n")
-        
-        if code in supported:
-            if code == 'zh-CHT':
-                if code not in Setting.language:
-                    Setting.language.append(code)
-                    print("Language changed to: ")
-                    print(Setting.language)
-                else:
-                    print("Language existed")
-                    
-            elif code == 'zh-CHS':
-                if code not in Setting.language:
-                    Setting.language.append(code)
-                    print("Language changed to: ")
-                    print(Setting.language)
-                else:
-                    print("Language existed")
-        else:
-            print("Language not supported")
-
-    def dellang():
-        print("Current language setting: ")
-        print(Setting.language)
-        
-        code = input("Enter language code to be hidden: \n")
-        if code in Setting.language:
-            Setting.language.remove(code)
-            print("Language changed to: ")
-            print(Setting.language)
-        else:
-            print("Language not found in setting")
-
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def fun():
@@ -86,12 +48,12 @@ def search():
 #        start = i.find(' ') + 1
 #        
 #        # zh-CHT
-#        if 'zh-CHT' in Setting.language:
+#        if Setting.language == 'zh-CHT':
 #            if i.startswith(word):
 #                matched.append(i[:start-1])
 #                
 #        # zh-CHS
-#        if 'zh-CHS' in Setting.language:
+#        if Setting.language == 'zh-CHS':
 #            if word == i[start:start+size]:
 #                end = start + i[start:].find(' ')
 #                matched.append(i[start:end])
@@ -101,12 +63,12 @@ def search():
         start = i.find('\t') + 1
         
         # zh-CHT
-        if 'zh-CHT' in Setting.language:
+        if Setting.language == 'zh-CHT':
             if i.startswith(word):
                 matched.append(i[:start-1])
                 
         # zh-CHS
-        if 'zh-CHS' in Setting.language:
+        if Setting.language == 'zh-CHS':
             if word == i[start:start+size]:
                 end = start + i[start:].find('\t')
                 matched.append(i[start:end])
@@ -139,9 +101,8 @@ def pinyin():
             if i.startswith(ch + ' '):
                 start = i.find('[') + 1
                 end = i.find(']')
-                if ch not in matched:
-                    matched.append(i[start:end])
-                    
+                matched.append(i[start:end])
+                
     result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
     
@@ -151,3 +112,20 @@ def pinyin():
         return result
     else:
         print("No matched record")
+
+def lang():
+    print("Supported language code: ")
+    print(supported)
+    
+    code = input("Enter preferred language code: \n")
+    
+    if code in supported:
+        if code == 'zh-CHT':
+            Setting.language = 'zh-CHT'
+            print("Language changed to: " + Setting.language)
+            
+        elif code == 'zh-CHS':
+            Setting.language = 'zh-CHS'
+            print("Language changed to: " + Setting.language)
+    else:
+        print("Language not supported")
