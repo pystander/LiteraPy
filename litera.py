@@ -10,16 +10,16 @@ import types
 from pathlib import Path
 
 # Read CEDICT file
-if Path('cedict_ts.u8').is_file():
-    with open('cedict_ts.u8','r',encoding='utf-8') as f:
+if Path('dict/cedict_ts.u8').is_file():
+    with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
         cedict = [line.rstrip('\n') for line in f]
         print("CEDICT loaded")
 else:
     print("CEDICT file not found")
     
 # Read Cidian file
-if Path('cidian_zhzh-kfcd-2021524.txt').is_file():
-    with open('cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
+if Path('dict/cidian_zhzh-kfcd-2021524.txt').is_file():
+    with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
         cidian = [line.rstrip('\n') for line in f]
         print("Cidian loaded")
         
@@ -31,7 +31,7 @@ class Setting:
     # Default language = ['zh-CHT']
     language = ['zh-CHT']
     
-    def addlang():
+    def lang():
         print("Supported language code: ")
         print(supported)
         
@@ -136,7 +136,7 @@ def pinyin():
         ch = char[n]
         
         for i in cedict:
-            if i.startswith(ch + ' ') or ' ' + ch + ' ' in i:
+            if i.startswith(ch + ' '):
                 start = i.find('[') + 1
                 end = i.find(']')
                 if ch not in matched:
