@@ -1,5 +1,5 @@
 #!/usr/bin/env Python
-# LiteraPy v1.0.5
+# LiteraPy v1.0.5a
 # Copyright (c) 2021 pystander
 
 # Import libraries
@@ -97,12 +97,12 @@ def adsearch():
 #        
 #        # zh-CHT
 #        if Setting.language == 'zh-CHT':
-#           if word in i:
+#           if word in i[:start]:
 #                matched.append(i[:start-1])
 #        
 #        # zh-CHS
 #        if Setting.language == 'zh-CHS':
-#            if word in i:
+#            if word in i[:start]:
 #                end = start + i[start:].find(' ')
 #                matched.append(i[start:end])
     
@@ -112,12 +112,12 @@ def adsearch():
         
         # zh-CHT
         if Setting.language == 'zh-CHT':
-            if word in i:
+            if word in i[:start]:
                 matched.append(i[:start-1])
                 
         # zh-CHS
         if Setting.language == 'zh-CHS':
-            if word in i:
+            if word in i[:start]:
                 end = start + i[start:].find('\t')
                 matched.append(i[start:end])
                 
