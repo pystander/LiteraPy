@@ -1,5 +1,5 @@
 #!/usr/bin/env Python
-# LiteraPy v1.0.5
+# LiteraPy v1.0.6
 # Copyright (c) 2021 pystander
 
 # Import libraries
@@ -36,12 +36,10 @@ if Path('dict/bad-words.txt').is_file():
         print("Bad words loaded")
 else:
     print("Bad word file not found")
-            
+    
 # Default settings
 supported = ['zh-CHT','zh-CHS']
 filt = ['slang','dialect']
-
-# Filtered words
 
 # Classes
 class Setting:
@@ -68,12 +66,12 @@ def search():
         
         # zh-CHT
         if Setting.language == 'zh-CHT':
-            if i.startswith(word) and not any(item in i for item in badword) and not any(item in i for item in filt):
+            if i.startswith(word) and not any(item in i for item in badword + filt):
                 matched.append(i[:start-1])
                 
             # zh-CHS
             if Setting.language == 'zh-CHS':
-                if word == i[start:start+size] and not any(item in i for item in filt) and not any(item in i for item in filt):
+                if word == i[start:start+size] and not any(item in i for item in badword + filt):
                     end = start + i[start:].find(' ')
                     matched.append(i[start:end])
                     
@@ -114,12 +112,12 @@ def adsearch():
         
         # zh-CHT
         if Setting.language == 'zh-CHT':
-           if word in i[:start] and not any(item in i for item in badword) and not any(item in i for item in filt):
+           if word in i[:start] and not any(item in i for item in badword + filt):
                 matched.append(i[:start-1])
         
         # zh-CHS
         if Setting.language == 'zh-CHS':
-            if word in i[:start] and not any(item in i for item in badword) and not any(item in i for item in filt):
+            if word in i[:start] and not any(item in i for item in badword + filt):
                 end = start + i[start:].find(' ')
                 matched.append(i[start:end])
                 
