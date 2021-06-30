@@ -23,7 +23,7 @@ if Path('dict/cidian_zhzh-kfcd-2021524.txt').is_file():
         cidian = [line.rstrip('\n') for line in f]
         print("Cidian loaded")
         
-# Read Bad Word file
+# Read Bad Words file
 if Path('dict/bad-words.txt').is_file():
     badword = []
     
