@@ -137,13 +137,34 @@ def pinyin():
     matched = []
     t_start = time.time()
     
-    for ch in word:
+    # Search whole phrase in Cidian
+    for i in cidian:
+        start = i.find('\t') + 1
+        end = i[start:].find('\t')
+        
+        if i.startswith(word + '\t') or word == i[start:start+end]:
+            matched.append(i[start+end+1:])
+            
+    # Search whole phrase in CEDICT
+    if len(matched) < 1:
         for i in cedict:
-            if i.startswith(ch + ' ') or ' ' + ch + ' ' == i[1:4]:
+            start = i.find(' ') + 1
+            end = i[start:].find(' ')
+            
+            if i.startswith(word + ' ') or word == i[start:start+end]:
                 start = i.find('[') + 1
                 end = i.find(']')
-                matched.append(i[start:end])
+                matched.append(i[start:end].lower())
                 
+    # If no matched, search per character
+    if len(matched) < 1:
+        for i in cedict:
+            for ch in word:
+                if i.startswith(ch + ' ') or ' ' + ch + ' ' == i[1:4]:
+                    start = i.find('[') + 1
+                    end = i.find(']')
+                    matched.append(i[start:end].lower())
+                    
     result = list(filter(None, list(dict.fromkeys(matched))))
     count = len(result)
     
