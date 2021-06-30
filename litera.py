@@ -69,12 +69,12 @@ def search():
             if i.startswith(word) and not any(item in i for item in badword + filt):
                 matched.append(i[:start-1])
                 
-            # zh-CHS
-            if Setting.language == 'zh-CHS':
-                if word == i[start:start+size] and not any(item in i for item in badword + filt):
-                    end = start + i[start:].find(' ')
-                    matched.append(i[start:end])
-                    
+        # zh-CHS
+        if Setting.language == 'zh-CHS':
+            if word == i[start:start+size] and not any(item in i for item in badword + filt):
+                end = start + i[start:].find(' ')
+                matched.append(i[start:end])
+                
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
