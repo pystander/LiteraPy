@@ -15,6 +15,8 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Optimization for clarity and efficiency
 
+- Bad words filtering using lists from [LDNOOBW](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)
+
 <br/>
 
 ## Installation
@@ -48,3 +50,5 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 [2] [CC-CEDICT Home [CC-CEDICT WIKI]](https://cc-cedict.org/wiki/)
 
 [3] [開放詞典](https://kaifangcidian.com/xiazai/)
+
+[4] [LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words: List of Dirty, Naughty, Obscene, and Otherwise Bad Words](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)
