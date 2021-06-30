@@ -23,8 +23,25 @@ if Path('dict/cidian_zhzh-kfcd-2021524.txt').is_file():
         cidian = [line.rstrip('\n') for line in f]
         print("Cidian loaded")
         
-# Supported languages
+# Read Bad Word file
+if Path('dict/bad-words.txt').is_file():
+    badword = []
+    
+    with open('dict/bad-words.txt','r',encoding='utf-8') as f:
+        profane = [line.rstrip('\n') for line in f]
+        
+        for i in profane:
+            badword.append(i)
+            
+        print("Bad words loaded")
+else:
+    print("Bad word file not found")
+            
+# Default settings
 supported = ['zh-CHT','zh-CHS']
+filt = ['slang','dialect']
+
+# Filtered words
 
 # Classes
 class Setting:
@@ -45,21 +62,21 @@ def search():
     matched = []
     t_start = time.time()
     
-#    # CEDICT
-#    for i in cedict:
-#        start = i.find(' ') + 1
-#        
-#        # zh-CHT
-#        if Setting.language == 'zh-CHT':
-#            if i.startswith(word):
-#                matched.append(i[:start-1])
-#                
-#        # zh-CHS
-#        if Setting.language == 'zh-CHS':
-#            if word == i[start:start+size]:
-#                end = start + i[start:].find(' ')
-#                matched.append(i[start:end])
-    
+    # CEDICT
+    for i in cedict:
+        start = i.find(' ') + 1
+        
+        # zh-CHT
+        if Setting.language == 'zh-CHT':
+            if i.startswith(word) and not any(item in i for item in badword) and not any(item in i for item in filt):
+                matched.append(i[:start-1])
+                
+            # zh-CHS
+            if Setting.language == 'zh-CHS':
+                if word == i[start:start+size] and not any(item in i for item in filt) and not any(item in i for item in filt):
+                    end = start + i[start:].find(' ')
+                    matched.append(i[start:end])
+                    
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
@@ -91,21 +108,21 @@ def adsearch():
     matched = []
     t_start = time.time()
     
-#    # CEDICT
-#    for i in cedict:
-#        start = i.find(' ') + 1
-#        
-#        # zh-CHT
-#        if Setting.language == 'zh-CHT':
-#           if word in i[:start]:
-#                matched.append(i[:start-1])
-#        
-#        # zh-CHS
-#        if Setting.language == 'zh-CHS':
-#            if word in i[:start]:
-#                end = start + i[start:].find(' ')
-#                matched.append(i[start:end])
-    
+    # CEDICT
+    for i in cedict:
+        start = i.find(' ') + 1
+        
+        # zh-CHT
+        if Setting.language == 'zh-CHT':
+           if word in i[:start] and not any(item in i for item in badword) and not any(item in i for item in filt):
+                matched.append(i[:start-1])
+        
+        # zh-CHS
+        if Setting.language == 'zh-CHS':
+            if word in i[:start] and not any(item in i for item in badword) and not any(item in i for item in filt):
+                end = start + i[start:].find(' ')
+                matched.append(i[start:end])
+                
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
