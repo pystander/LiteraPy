@@ -15,7 +15,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Optimization for clarity and efficiency
 
-- Bad words ([LDNOOBW](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)) and customized search filtering
+- Bad words list ([LDNOOBW](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)) and customized filtering
 
 <br/>
 
