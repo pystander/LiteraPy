@@ -1,5 +1,5 @@
 #!/usr/bin/env Python
-# LiteraPy v1.0.6
+# LiteraPy v1.0.7
 # Copyright (c) 2021 pystander
 
 # Import libraries
@@ -7,39 +7,30 @@ import re
 import codecs
 import time
 import types
-from pathlib import Path
 
 # Read CEDICT file
-if Path('dict/cedict_ts.u8').is_file():
-    with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
-        cedict = [line.rstrip('\n') for line in f]
-        print("CEDICT loaded")
-else:
-    print("CEDICT file not found")
+with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
+    cedict = [line.rstrip('\n') for line in f]
+    print("CEDICT loaded")
     
 # Read Cidian file
-if Path('dict/cidian_zhzh-kfcd-2021524.txt').is_file():
-    with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
-        cidian = [line.rstrip('\n') for line in f]
-        print("Cidian loaded")
-        
+with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
+    cidian = [line.rstrip('\n') for line in f]
+    print("Cidian loaded")
+    
 # Read Bad Words file
-if Path('dict/bad-words.txt').is_file():
+with open('dict/bad-words.txt','r',encoding='utf-8') as f:
+    profane = [line.rstrip('\n') for line in f]
     badword = []
     
-    with open('dict/bad-words.txt','r',encoding='utf-8') as f:
-        profane = [line.rstrip('\n') for line in f]
+    for i in profane:
+        badword.append(i)
         
-        for i in profane:
-            badword.append(i)
-            
-        print("Bad words loaded")
-else:
-    print("Bad word file not found")
+    print("Bad words loaded")
     
 # Default settings
 supported = ['zh-CHT','zh-CHS']
-filt = ['slang','dialect']
+filt = ['slang','dialect','county','district of']
 
 # Classes
 class Setting:
@@ -48,12 +39,24 @@ class Setting:
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def fun():
-    function = []
-    
     for f in globals().values():
         if type(f) == types.FunctionType:
             print(f)
             
+def lang():
+    code = input("Enter preferred language code: " + str(supported) + "\n")
+    
+    if code == 'zh-CHT':
+        Setting.language = 'zh-CHT'
+        print("Language changed to: " + Setting.language)
+        
+    elif code == 'zh-CHS':
+        Setting.language = 'zh-CHS'
+        print("Language changed to: " + Setting.language)
+        
+    else:
+        print("Language not supported")
+        
 def search():
     word = input("Search collocations for character(s): \n")
     size = len(word)
@@ -91,9 +94,8 @@ def search():
                 matched.append(i[start:end])
                 
     result = list(filter(None, list(dict.fromkeys(matched))))
-    count = len(result)
     
-    if count > 0:
+    if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
@@ -114,7 +116,7 @@ def adsearch():
         if Setting.language == 'zh-CHT':
            if word in i[:start] and not any(item in i for item in badword + filt):
                 matched.append(i[:start-1])
-        
+                
         # zh-CHS
         if Setting.language == 'zh-CHS':
             if word in i[:start] and not any(item in i for item in badword + filt):
@@ -137,9 +139,8 @@ def adsearch():
                 matched.append(i[start:end])
                 
     result = list(filter(None, list(dict.fromkeys(matched))))
-    count = len(result)
     
-    if count > 0:
+    if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
@@ -161,7 +162,7 @@ def pinyin():
             matched.append(i[start+end+1:])
             
     # Search whole phrase in CEDICT
-    if len(matched) < 1:
+    if not matched:
         for i in cedict:
             start = i.find(' ') + 1
             end = i[start:].find(' ')
@@ -172,7 +173,7 @@ def pinyin():
                 matched.append(i[start:end].lower())
                 
     # If no matched, search per character
-    if len(matched) < 1:
+    if not matched:
         for i in cedict:
             for ch in word:
                 if i.startswith(ch + ' ') or ' ' + ch + ' ' == i[1:4]:
@@ -181,27 +182,10 @@ def pinyin():
                     matched.append(i[start:end].lower())
                     
     result = list(filter(None, list(dict.fromkeys(matched))))
-    count = len(result)
     
-    if count > 0:
+    if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
         print("No matched record")
-        
-def lang():
-    print("Supported language code: " + str(supported))
-    
-    code = input("Enter preferred language code: \n")
-    
-    if code in supported:
-        if code == 'zh-CHT':
-            Setting.language = 'zh-CHT'
-            print("Language changed to: " + Setting.language)
-            
-        elif code == 'zh-CHS':
-            Setting.language = 'zh-CHS'
-            print("Language changed to: " + Setting.language)
-    else:
-        print("Language not supported")

@@ -35,6 +35,8 @@ No external package or library is required to run the program.
 
 ☐ More languages to be supported
 
+☐ Temp for less time in re-search 
+
 <br/>
 
 ## License
