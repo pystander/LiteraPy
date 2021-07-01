@@ -9,17 +9,17 @@ import time
 import types
 
 # Read CEDICT file
-with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
+with open('dict/vocab/cedict_ts.u8','r',encoding='utf-8') as f:
     cedict = [line.rstrip('\n') for line in f]
     print("CEDICT loaded")
     
 # Read Cidian file
-with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
+with open('dict/vocab/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
     cidian = [line.rstrip('\n') for line in f]
     print("Cidian loaded")
     
 # Read Bad Words file
-with open('dict/bad-words.txt','r',encoding='utf-8') as f:
+with open('dict/vocab/bad-words.txt','r',encoding='utf-8') as f:
     profane = [line.rstrip('\n') for line in f]
     badword = []
     
@@ -30,7 +30,7 @@ with open('dict/bad-words.txt','r',encoding='utf-8') as f:
     
 # Default settings
 supported = ['zh-CHT','zh-CHS']
-filt = ['slang','dialect','county','district of']
+filt = ['slang','dialect','county','County','district of']
 
 # Classes
 class Setting:
