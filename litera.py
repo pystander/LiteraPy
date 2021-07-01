@@ -97,7 +97,7 @@ def search():
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
+        print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
         print("No matched record")
@@ -142,7 +142,7 @@ def adsearch():
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
+        print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
         print("No matched record")
@@ -185,7 +185,7 @@ def pinyin():
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Total of " + str(count) + " record(s) (" + str(interval) + " seconds)")
+        print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
         print("No matched record")
