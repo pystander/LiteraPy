@@ -13,24 +13,23 @@ with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
     cedict = [line.rstrip('\n') for line in f]
     print("CEDICT loaded")
     
-# Read Cidian file
+# Read cidian file
 with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
     cidian = [line.rstrip('\n') for line in f]
     print("Cidian loaded")
     
-# Read Bad Words file
+# Read bad-words file
 with open('dict/bad-words.txt','r',encoding='utf-8') as f:
-    profane = [line.rstrip('\n') for line in f]
-    badword = []
-    
-    for i in profane:
-        badword.append(i)
-        
+    badword = [line.rstrip('\n') for line in f]
     print("Bad words loaded")
+    
+# Read filter file
+with open('dict/filter.txt','r',encoding='utf-8') as f:
+    filt = [line.rstrip('\n') for line in f]
+    print("Filtered words loaded")
     
 # Default settings
 supported = ['zh-CHT','zh-CHS']
-filt = ['slang','dialect','county','County','district of']
 
 # Classes
 class Setting:
