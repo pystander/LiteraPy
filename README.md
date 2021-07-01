@@ -11,6 +11,8 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Built on external libraries (Currently based on [MDBG CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict) and [開放詞典](https://kaifangcidian.com/xiazai/))
 
+- Text segmentation with [jieba](https://github.com/fxsjy/jieba) and [paddlepaddle-tiny](https://pypi.org/project/paddlepaddle-tiny/)
+
 - Vocabulary and Pinyin search
 
 - Optimization for clarity and efficiency
@@ -29,13 +31,15 @@ No external package or library is required to run the program.
 
 ## To-do List
 
-☒ Multi-character Pinyin search -> See [v1.0.3](https://github.com/pystander/LiteraPy/releases/tag/v1.0.3)
+- [x] Multi-character Pinyin search -> See [v1.0.3](https://github.com/pystander/LiteraPy/releases/tag/v1.0.3)
 
-☐ AI with word suggestions and identifier for Chinese part of speech (主謂賓 定狀補)
+- [x] Identifier for Chinese part of speech (主謂賓 定狀補) -> [jieba](https://github.com/fxsjy/jieba)
 
-☐ More languages to be supported
+- [ ] AI with word suggestions
 
-☐ Temp for less time in re-search 
+- [ ] More languages to be supported
+
+- [ ] Temp for less time in re-search 
 
 <br/>
 
@@ -54,3 +58,5 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 [3] [開放詞典](https://kaifangcidian.com/xiazai/)
 
 [4] [LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words: List of Dirty, Naughty, Obscene, and Otherwise Bad Words](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)
+
+[5] [fxsjy/jieba: 结巴中文分词](https://github.com/fxsjy/jieba)
