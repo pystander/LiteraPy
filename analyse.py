@@ -9,7 +9,7 @@ import jieba # Package 'jieba' required
 import itertools
 import ast
 from collections import Counter
-        
+
 # Load jieba settings
 jieba.enable_paddle()
 jieba.set_dictionary('dict/dict.txt')
