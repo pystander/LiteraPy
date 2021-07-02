@@ -54,6 +54,6 @@ def initfq():
         print("Frequency file cleared")
 
 def fq():
-    with open('dict/frequency.txt',encoding='utf-8') as f:
+    with open('dict/frequency.txt','r',encoding='utf-8') as f:
         fq = ast.literal_eval(f.read())
         return fq
