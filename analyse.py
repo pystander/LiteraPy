@@ -45,7 +45,12 @@ def analyse():
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Time interval: " + str(interval) + " seconds")
     return result
-    
+
+def fq():
+    with open('dict/frequency.txt','r',encoding='utf-8') as f:
+        fq = ast.literal_eval(f.read())
+        return fq
+
 def initfq():
     with open('dict/frequency.txt','r+',encoding='utf-8') as f:
         data = f.read()
@@ -53,9 +58,4 @@ def initfq():
         f.write('{}')
         f.truncate()
         print("Frequency file cleared")
-        
-def fq():
-    with open('dict/frequency.txt','r',encoding='utf-8') as f:
-        fq = ast.literal_eval(f.read())
-        return fq
 
