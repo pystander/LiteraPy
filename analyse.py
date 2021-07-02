@@ -24,7 +24,7 @@ def analyse():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause)
+        seg_list = jieba.lcut(clause,use_paddle=True)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
@@ -34,7 +34,7 @@ def analyse():
     result = list(itertools.chain(*result))
     result_fq = dict(Counter(result))
     
-    # Read and store frequency
+    # Word frequency count
     with open('dict/frequency.txt',encoding='utf-8') as f:
         fq = ast.literal_eval(f.read())
         learnt = dict(Counter(fq) + Counter(result_fq))
@@ -58,3 +58,4 @@ def fq():
     with open('dict/frequency.txt','r',encoding='utf-8') as f:
         fq = ast.literal_eval(f.read())
         return fq
+
