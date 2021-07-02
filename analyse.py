@@ -24,7 +24,7 @@ def analyse():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause,use_paddle=True)
+        seg_list = jieba.lcut(clause)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
