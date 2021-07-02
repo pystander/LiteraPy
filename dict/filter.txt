@@ -2,4 +2,7 @@ slang
 dialect
 county
 County
-district of
+district
+prefecture
+prefecture level city
+province
