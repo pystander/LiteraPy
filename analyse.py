@@ -10,8 +10,9 @@ import itertools
 import ast
 from collections import Counter
         
-# Enable jieba paddle mode
+# Load jieba settings
 jieba.enable_paddle()
+jieba.set_dictionary('dict/dict.txt')
 
 # Define functions
 def analyse():
@@ -43,7 +44,7 @@ def analyse():
             
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Time interval: " + str(interval) + " seconds")
-    print(result)
+    return result
     
 def initfq():
     with open('dict/frequency.txt','r+',encoding='utf-8') as f:
@@ -52,7 +53,7 @@ def initfq():
         f.write('{}')
         f.truncate()
         print("Frequency file cleared")
-
+        
 def fq():
     with open('dict/frequency.txt','r',encoding='utf-8') as f:
         fq = ast.literal_eval(f.read())
