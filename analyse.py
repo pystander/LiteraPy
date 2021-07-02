@@ -14,6 +14,9 @@ from collections import Counter
 jieba.enable_paddle()
 jieba.set_dictionary('dict/dict.txt')
 
+# Default settings
+fq_mode = False
+
 # Define functions
 def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
@@ -35,13 +38,14 @@ def analyse():
     result_fq = dict(Counter(result))
     
     # Word frequency count
-    with open('dict/frequency.txt',encoding='utf-8') as f:
-        fq = ast.literal_eval(f.read())
-        learnt = dict(Counter(fq) + Counter(result_fq))
-        
-        with open('dict/frequency.txt','r+',encoding='utf-8') as f:
-            f.write(str(learnt))
+    if fq_mode:
+        with open('dict/frequency.txt',encoding='utf-8') as f:
+            fq = ast.literal_eval(f.read())
+            learnt = dict(Counter(fq) + Counter(result_fq))
             
+            with open('dict/frequency.txt','r+',encoding='utf-8') as f:
+                f.write(str(learnt))
+                
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Time interval: " + str(interval) + " seconds")
     return result
@@ -58,4 +62,3 @@ def initfq():
         f.write('{}')
         f.truncate()
         print("Frequency file cleared")
-
