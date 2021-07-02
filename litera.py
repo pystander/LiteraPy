@@ -1,5 +1,5 @@
 #!/usr/bin/env Python
-# LiteraPy v1.0.7
+# LiteraPy v1.0.8
 # Copyright (c) 2021 pystander
 
 # Import libraries
