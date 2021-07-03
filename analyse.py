@@ -20,7 +20,7 @@ fq_mode = True
 # Define functions
 def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
-    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”',txt)))
+    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
     temp = []
     result = []
     t_start = time.time()
