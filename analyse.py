@@ -15,7 +15,7 @@ jieba.enable_paddle()
 jieba.set_dictionary('dict/dict.txt')
 
 # Default settings
-fq_mode = False
+fq_mode = True
 
 # Define functions
 def analyse():
