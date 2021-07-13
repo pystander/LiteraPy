@@ -90,11 +90,8 @@ def search():
                 end = start + i[start:].find('\t')
                 matched.append(i[start:end])
                 
-    # Remove NULL and repeated result
-    temp = list(filter(None, list(dict.fromkeys(matched))))
-    
-    # Sort by length
-    result = sorted(temp,key=len)
+    # Optimize results
+    result = sorted(list(filter(None, list(dict.fromkeys(matched)))),key=len)
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
@@ -139,11 +136,8 @@ def adsearch():
             if word in i[start:end]:
                 matched.append(i[start:end])
                 
-    # Remove NULL and repeated result
-    temp = list(filter(None, list(dict.fromkeys(matched))))
-    
-    # Sort by length
-    result = sorted(temp,key=len)
+    # Optimize results
+    result = sorted(list(filter(None, list(dict.fromkeys(matched)))),key=len)
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
