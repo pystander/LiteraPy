@@ -31,14 +31,14 @@ supported = ['zh-CHT','zh-CHS']
 # Classes
 class Setting:
     language = 'zh-CHT' # Default language as 'zh-CHT'
-
+    
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def fun():
     for f in globals().values():
         if type(f) == types.FunctionType:
             print(f)
-
+            
 def lang():
     print("Current language: " + Setting.language)
     code = input("Enter preferred language code: " + str(supported) + "\n")
@@ -53,7 +53,7 @@ def lang():
         
     else:
         print("Language not supported")
-
+        
 def search():
     word = input("Search collocations for character(s): \n")
     size = len(word)
@@ -99,7 +99,7 @@ def search():
         return result
     else:
         print("No matched record")
-
+        
 def adsearch():
     word = input("Advanced search for character(s): \n")
     size = len(word)
@@ -145,7 +145,7 @@ def adsearch():
         return result
     else:
         print("No matched record")
-
+        
 def pinyin():
     word = input("Search Pinyin for character(s): \n")
     char =[]
@@ -188,3 +188,4 @@ def pinyin():
         return result
     else:
         print("No matched record")
+        
