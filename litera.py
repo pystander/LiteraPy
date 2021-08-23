@@ -24,7 +24,7 @@ with open('dict/bad-words.txt','r',encoding='utf-8') as f:
 with open('dict/filter.txt','r',encoding='utf-8') as f:
     filt = [line.rstrip('\n') for line in f]
     print("Filter loaded")
-
+    
 # Default settings
 supported = ['zh-CHT','zh-CHS']
 
