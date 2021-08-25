@@ -1,4 +1,4 @@
-#!/usr/bin/env Python
+#!/usr/bin/env python3
 # LiteraPy v1.0.8
 # Copyright (c) 2021 pystander
 
