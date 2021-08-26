@@ -40,7 +40,7 @@ def fun():
 
 def lang():
     print("Current language: " + Setting.language)
-    code = input("Enter preferred language code: " + str(supported) + "\n")
+    code = input("Enter preferred language code: ['zh-CHT', 'zh-CHS']\n")
     
     if code == 'zh-CHT':
         Setting.language = 'zh-CHT'
