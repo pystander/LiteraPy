@@ -13,7 +13,7 @@ with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
     cedict = [line.rstrip('\n') for line in f]
     print("CEDICT loaded")
     
-# Format
+# Formating
 phaser = []
 
 for i in cedict:
