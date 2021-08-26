@@ -91,7 +91,8 @@ def search():
                 matched.append(i[start:end])
                 
     # Optimize results
-    result = sorted(list(filter(None, list(dict.fromkeys(matched)))),key=len)
+    temp = list(filter(None, list(dict.fromkeys(matched))))
+    result = sorted(temp, key=len)
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
@@ -137,7 +138,8 @@ def adsearch():
                 matched.append(i[start:end])
                 
     # Optimize results
-    result = sorted(list(filter(None, list(dict.fromkeys(matched)))),key=len)
+    temp = list(filter(None, list(dict.fromkeys(matched))))
+    result = sorted(temp, key=len)
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
@@ -180,7 +182,8 @@ def pinyin():
                     end = i.find(']')
                     matched.append(i[start:end].lower())
                     
-    result = list(filter(None, list(dict.fromkeys(matched))))
+    temp = list(filter(None, list(dict.fromkeys(matched))))
+    result = sorted(temp, key=len)
     
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
