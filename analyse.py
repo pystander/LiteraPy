@@ -66,7 +66,7 @@ def initfq():
 
 def fqmode():
     print("Current FQ mode: " + str(Setting.fq_mode))
-    code = input("Enter preferred mode: [True/False]\n")
+    code = input("Enter preferred mode: ['True', 'False']\n")
     
     if code == "True":
         Setting.fq_mode = True
