@@ -17,7 +17,7 @@ jieba.set_dictionary('dict/dict.txt')
 # Default settings
 class Setting:
     fq_mode = True
-    
+
 # Define functions
 def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
@@ -63,7 +63,7 @@ def initfq():
         f.write('{}')
         f.truncate()
         print("Frequency file cleared")
-        
+
 def fqmode():
     print("Current FQ mode: " + str(Setting.fq_mode))
     code = input("Enter preferred mode: [True/False]\n")
