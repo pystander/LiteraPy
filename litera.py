@@ -28,7 +28,6 @@ with open('dict/filter.txt','r',encoding='utf-8') as f:
 # Default settings
 supported = ['zh-CHT','zh-CHS']
 
-# Classes
 class Setting:
     language = 'zh-CHT' # Default language as 'zh-CHT'
     
@@ -191,4 +190,3 @@ def pinyin():
         return result
     else:
         print("No matched record")
-        
