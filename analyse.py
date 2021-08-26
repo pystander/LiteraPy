@@ -15,8 +15,9 @@ jieba.enable_paddle()
 jieba.set_dictionary('dict/dict.txt')
 
 # Default settings
-fq_mode = True
-
+class Setting:
+    fq_mode = True
+    
 # Define functions
 def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
@@ -38,7 +39,7 @@ def analyse():
     result_fq = dict(Counter(result))
     
     # Word frequency count
-    if fq_mode:
+    if Setting.fq_mode:
         with open('dict/frequency.txt',encoding='utf-8') as f:
             fq = ast.literal_eval(f.read())
             learnt = dict(Counter(fq) + Counter(result_fq))
@@ -62,3 +63,18 @@ def initfq():
         f.write('{}')
         f.truncate()
         print("Frequency file cleared")
+        
+def fqmode():
+    print("Current FQ mode: " + str(Setting.fq_mode))
+    code = input("Enter preferred mode: [True/False]\n")
+    
+    if code == "True":
+        Setting.fq_mode = True
+        print("FQ mode changed to: " + str(Setting.fq_mode))
+        
+    elif code == "False":
+        Setting.fq_mode = False
+        print("FQ mode changed to: " + str(Setting.fq_mode))
+        
+    else:
+        print("FQ mode not supported")
