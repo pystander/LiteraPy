@@ -7,6 +7,7 @@ import re
 import codecs
 import time
 import types
+import cython
 
 # Load dictionaries
 with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
