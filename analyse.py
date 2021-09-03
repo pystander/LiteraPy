@@ -8,7 +8,6 @@ import time
 import jieba # Package 'jieba' required
 import itertools
 import ast
-from litera import search
 from collections import Counter
 
 # Load jieba settings
