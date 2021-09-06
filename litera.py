@@ -53,8 +53,7 @@ def lang():
     else:
         print("Language not supported")
 
-def search():
-    word = input("Search collocations for character(s): \n")
+def search(word: str):
     size = len(word)
     matched = []
     t_start = time.time()
@@ -98,7 +97,7 @@ def search():
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
-        print("No matched record")
+        return None
 
 def adsearch():
     word = input("Advanced search for character(s): \n")
