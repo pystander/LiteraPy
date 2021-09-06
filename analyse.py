@@ -52,6 +52,15 @@ def analyse():
     print("Time interval: " + str(interval) + " seconds")
     return result
 
+def checklist(clauses: list):
+    cklist = []
+    
+    for i in clauses:
+        if search(i):
+            cklist.append(i)
+            
+    return cklist
+
 def fq():
     with open('dict/frequency.txt','r',encoding='utf-8') as f:
         fq = ast.literal_eval(f.read())
@@ -79,12 +88,3 @@ def fqmode():
         
     else:
         print("FQ mode not supported")
-
-def checklist(clauses: list):
-    cklist = []
-    
-    for i in clauses:
-        if search(i):
-            cklist.append(i)
-            
-    return cklist
