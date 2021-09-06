@@ -9,6 +9,7 @@ import jieba # Package 'jieba' required
 import itertools
 import ast
 from collections import Counter
+from litera import search
 
 # Load jieba settings
 jieba.enable_paddle()
@@ -35,7 +36,7 @@ def analyse():
     for i in temp:
         result.append(i.split(' '))
         
-    result = list(itertools.chain(*result))
+    result = checklist(list(itertools.chain(*result)))
     result_fq = dict(Counter(result))
     
     # Word frequency count
@@ -78,3 +79,12 @@ def fqmode():
         
     else:
         print("FQ mode not supported")
+
+def checklist(clauses: list):
+    cklist = []
+    
+    for i in clauses:
+        if search(i):
+            cklist.append(i)
+            
+    return cklist
