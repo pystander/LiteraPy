@@ -99,8 +99,7 @@ def search(word: str):
     else:
         return None
 
-def adsearch():
-    word = input("Advanced search for character(s): \n")
+def adsearch(word: str):
     size = len(word)
     matched = []
     t_start = time.time()
