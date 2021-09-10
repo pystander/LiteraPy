@@ -145,8 +145,7 @@ def adsearch(word: str):
     else:
         print("No matched record")
 
-def pinyin():
-    word = input("Search Pinyin for character(s): \n")
+def pinyin(word: str):
     char =[]
     matched = []
     t_start = time.time()
