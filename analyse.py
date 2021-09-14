@@ -8,8 +8,8 @@ import time
 import jieba # Package 'jieba' required
 import itertools
 import ast
-from collections import Counter
 from litera import search
+from collections import Counter
 
 # Load jieba settings
 jieba.enable_paddle()
