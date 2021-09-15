@@ -8,7 +8,7 @@ import time
 import jieba # Package 'jieba' required
 import itertools
 import ast
-from litera import search
+from litera import search, lang
 from collections import Counter
 
 # Load jieba settings
@@ -29,7 +29,7 @@ def analyse():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause,use_paddle=True)
+        seg_list = jieba.lcut_for_search(clause,HMM=True)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
@@ -59,8 +59,8 @@ def checklist(clauses: list):
         if search(i):
             cklist.append(i)
             
-    remain = list(set(clauses) - set(cklist))
-    cklist.extend(remain)
+#    remain = list(set(clauses) - set(cklist))
+#    cklist.extend(remain)
     
     return cklist
 
