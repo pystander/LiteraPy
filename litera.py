@@ -38,10 +38,7 @@ def fun():
         if type(f) == types.FunctionType:
             print(f)
 
-def lang():
-    print("Current language: " + Setting.language)
-    code = input("Enter preferred language code: ['zh-CHT', 'zh-CHS']\n")
-    
+def lang(code: ['zh-CHT','zh-CHS']):
     if code == 'zh-CHT':
         Setting.language = 'zh-CHT'
         print("Language changed to: " + Setting.language)
