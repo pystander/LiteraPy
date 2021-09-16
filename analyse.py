@@ -59,8 +59,8 @@ def checklist(clauses: list):
         if search(i):
             cklist.append(i)
             
-#    remain = list(set(clauses) - set(cklist))
-#    cklist.extend(remain)
+    remain = list(set(clauses) - set(cklist))
+    cklist.extend(remain)
     
     return cklist
 
