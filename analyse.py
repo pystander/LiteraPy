@@ -9,7 +9,7 @@ import jieba # Package 'jieba' required
 import jieba.posseg as pseg
 import itertools
 import ast
-from litera import search, lang
+from litera import search, adsearch, lang
 from collections import Counter
 
 # Load jieba settings
@@ -21,7 +21,7 @@ class Setting:
     fq_mode = True
 
 # Define functions
-def analyse():
+def analyse_jieba():
     txt = input("Enter the whole paragraph / sentence(s): \n")
     clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
     temp = []
@@ -30,7 +30,7 @@ def analyse():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut_for_search(clause,HMM=True)
+        seg_list = jieba.lcut(clause, use_paddle=True, HMM=True)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
@@ -53,15 +53,32 @@ def analyse():
     print("Time interval: " + str(interval) + " seconds")
     return result
 
+def analyse_self():
+    txt = input("Enter the whole paragraph / sentence(s): \n")
+    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
+    temp = []
+    result = []
+    t_start = time.time()
+    
+    # Per phrases
+    for i in clauses:
+        for j in range(len(i) + 1):
+            temp.append(checklist(i[:j]))
+            
+    result = list(itertools.chain(*temp))
+    
+    interval = '{0:.3f}'.format(time.time() - t_start)
+    print("Time interval: " + str(interval) + " seconds")
+    return temp
+    
+#    return result
+
 def checklist(clauses: list):
     cklist = []
     
     for i in clauses:
         if search(i):
             cklist.append(i)
-            
-    remain = list(set(clauses) - set(cklist))
-    cklist.extend(remain)
     
     return cklist
 
