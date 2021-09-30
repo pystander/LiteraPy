@@ -6,10 +6,9 @@
 import re
 import time
 import jieba # Package 'jieba' required
-import jieba.posseg as pseg
 import itertools
 import ast
-from litera import search, adsearch, lang
+from litera import search
 from collections import Counter
 
 # Load jieba settings
