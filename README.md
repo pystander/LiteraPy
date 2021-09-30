@@ -37,9 +37,9 @@ No external package or library is required to run the program.
 
 - [ ] AI with word suggestions
 
-- [ ] More languages to be supported
-
 - [ ] Temp for less time in re-search 
+
+- [ ] CPython Implementation
 
 <br/>
 
