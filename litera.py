@@ -55,6 +55,9 @@ def search(word: str):
     matched = []
     t_start = time.time()
     
+    if word == "":
+        return None
+    
     # CEDICT
     for i in cedict:
         start = i.find(' ') + 1
@@ -100,6 +103,9 @@ def adsearch(word: str):
     size = len(word)
     matched = []
     t_start = time.time()
+    
+    if word == "":
+        return None
     
     # CEDICT
     for i in cedict:
