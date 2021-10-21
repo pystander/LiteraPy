@@ -153,6 +153,9 @@ def pinyin(word: str):
     matched = []
     t_start = time.time()
     
+    if word == "":
+        return None
+    
     # Search whole phrase in Cidian
     for i in cidian:
         start = i.find('\t') + 1
