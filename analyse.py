@@ -27,6 +27,9 @@ def analyse():
     result = []
     t_start = time.time()
     
+    if txt == "":
+        return None;
+    
     # Cut by jieba
     for clause in clauses:
         seg_list = jieba.lcut(clause, use_paddle=True, HMM=True)
