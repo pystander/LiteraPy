@@ -8,7 +8,6 @@ import time
 import jieba # Package 'jieba' required
 import itertools
 import ast
-from litera import search
 from collections import Counter
 
 # Load jieba settings
@@ -20,7 +19,7 @@ class Setting:
     fq_mode = True
 
 # Define functions
-def analyse_jieba():
+def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
     clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
     temp = []
@@ -29,14 +28,14 @@ def analyse_jieba():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause, use_paddle=True, HMM=True)
+        seg_list = jieba.lcut(clause,use_paddle=True)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
     for i in temp:
         result.append(i.split(' '))
         
-    result = checklist(list(itertools.chain(*result)))
+    result = list(itertools.chain(*result))
     result_fq = dict(Counter(result))
     
     # Word frequency count
@@ -51,35 +50,6 @@ def analyse_jieba():
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Time interval: " + str(interval) + " seconds")
     return result
-
-def analyse_self():
-    txt = input("Enter the whole paragraph / sentence(s): \n")
-    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
-    temp = []
-    result = []
-    t_start = time.time()
-    
-    # Per phrases
-    for i in clauses:
-        for j in range(len(i) + 1):
-            temp.append(checklist(i[:j]))
-            
-    result = list(itertools.chain(*temp))
-    
-    interval = '{0:.3f}'.format(time.time() - t_start)
-    print("Time interval: " + str(interval) + " seconds")
-    return temp
-    
-#    return result
-
-def checklist(clauses: list):
-    cklist = []
-    
-    for i in clauses:
-        if search(i):
-            cklist.append(i)
-    
-    return cklist
 
 def fq():
     with open('dict/frequency.txt','r',encoding='utf-8') as f:
@@ -96,7 +66,7 @@ def initfq():
 
 def fqmode():
     print("Current FQ mode: " + str(Setting.fq_mode))
-    code = input("Enter preferred mode: ['True', 'False']\n")
+    code = input("Enter preferred mode: [True/False]\n")
     
     if code == "True":
         Setting.fq_mode = True
