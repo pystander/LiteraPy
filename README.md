@@ -33,7 +33,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - [x] Identifier for Chinese part of speech (主謂賓 定狀補) -> [jieba](https://github.com/fxsjy/jieba)
 
-- [ ] AI with word suggestions
+- [ ] AI / algorithms with word suggestions (e.g. HMM & Viterbi)
 
 - [ ] Temp for less time in re-search 
 
