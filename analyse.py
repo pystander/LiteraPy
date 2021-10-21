@@ -8,6 +8,7 @@ import time
 import jieba # Package 'jieba' required
 import itertools
 import ast
+from litera import search
 from collections import Counter
 
 # Load jieba settings
@@ -28,14 +29,14 @@ def analyse():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause,use_paddle=True)
+        seg_list = jieba.lcut(clause, use_paddle=True, HMM=True)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
     for i in temp:
         result.append(i.split(' '))
         
-    result = list(itertools.chain(*result))
+    result = checklist(list(itertools.chain(*result)))
     result_fq = dict(Counter(result))
     
     # Word frequency count
@@ -50,6 +51,15 @@ def analyse():
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Time interval: " + str(interval) + " seconds")
     return result
+
+def checklist(clauses: list):
+    cklist = []
+    
+    for i in clauses:
+        if search(i):
+            cklist.append(i)
+    
+    return cklist
 
 def fq():
     with open('dict/frequency.txt','r',encoding='utf-8') as f:
@@ -66,7 +76,7 @@ def initfq():
 
 def fqmode():
     print("Current FQ mode: " + str(Setting.fq_mode))
-    code = input("Enter preferred mode: [True/False]\n")
+    code = input("Enter preferred mode: ['True', 'False']\n")
     
     if code == "True":
         Setting.fq_mode = True
