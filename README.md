@@ -2,7 +2,7 @@
 
 ``LiteraPy`` is a pure-Python program dedicated for autofilling Chinese vocabularies and phrases. It is particularly designed to assist students and writers in their writings with matched, suitable word choice.
 
-Please note that this is only my own practice on Python as an IT student, and this should never be taken as a high-end solution.
+Please note that this is only my own practice on Python as a CS student. The program is still under development and should never be taken as a high-end solution.
 For further enquiries, please feel free to contact me on GitHub via [Issues](https://github.com/pystander/LiteraPy/issues).
 
 <br/>
