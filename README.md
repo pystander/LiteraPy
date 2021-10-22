@@ -35,9 +35,9 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - [ ] AI / algorithms with word suggestions (e.g. HMM & Viterbi)
 
-- [ ] Temp for less time in re-search 
+- [x] Temp for less time in re-search 
 
-- [ ] CPython Implementation
+- [ ] CPython Implementation to improve efficiency
 
 <br/>
 
