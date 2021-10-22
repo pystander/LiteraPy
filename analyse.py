@@ -61,7 +61,7 @@ def checklist(clauses: list):
     for i in clauses:
         for j in range(len(fq())):
             key, value = list(fq().items())[j]
-
+            
         if search(i) or key in i:
             cklist.append(i)
     
