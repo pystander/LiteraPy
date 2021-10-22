@@ -31,15 +31,13 @@ supported = ['zh-CHT','zh-CHS']
 class Setting:
     language = 'zh-CHT' # Default language as 'zh-CHT'
     temp_word = ''
+    temp_adword = ''
     temp_result = []
+    temp_adresult = []
     
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def search(word: str):
-    size = len(word)
-    matched = []
-    t_start = time.time()
-
     # Empty input
     if word == "":
         return None
@@ -49,6 +47,10 @@ def search(word: str):
         print("Temp loaded for repeated search")
         return Setting.temp_result
     
+    size = len(word)
+    matched = []
+    t_start = time.time()
+        
     # CEDICT
     for i in cedict:
         start = i.find(' ') + 1
@@ -95,12 +97,18 @@ def search(word: str):
         return None
 
 def adsearch(word: str):
+    # Empty input
+    if word == "":
+        return None
+    
+    # Temp
+    if word == Setting.temp_adword:
+        print("Temp loaded for repeated search")
+        return Setting.temp_adresult
+    
     size = len(word)
     matched = []
     t_start = time.time()
-    
-    if word == "":
-        return None
     
     # CEDICT
     for i in cedict:
@@ -137,6 +145,10 @@ def adsearch(word: str):
     result = sorted(temp, key=len)
     
     if result:
+        # Temp
+        Setting.temp_adword = word
+        Setting.temp_adresult = result
+        
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
