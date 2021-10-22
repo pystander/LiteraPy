@@ -30,33 +30,24 @@ supported = ['zh-CHT','zh-CHS']
 
 class Setting:
     language = 'zh-CHT' # Default language as 'zh-CHT'
-
+    temp_word = ''
+    temp_result = []
+    
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
-def fun():
-    for f in globals().values():
-        if type(f) == types.FunctionType:
-            print(f)
-
-def lang(code: ['zh-CHT','zh-CHS']):
-    if code == 'zh-CHT':
-        Setting.language = 'zh-CHT'
-        print("Language changed to: " + Setting.language)
-        
-    elif code == 'zh-CHS':
-        Setting.language = 'zh-CHS'
-        print("Language changed to: " + Setting.language)
-        
-    else:
-        print("Language not supported")
-
 def search(word: str):
     size = len(word)
     matched = []
     t_start = time.time()
-    
+
+    # Empty input
     if word == "":
         return None
+    
+    # Temp
+    if word == Setting.temp_word:
+        print("Temp loaded for repeated search")
+        return Setting.temp_result
     
     # CEDICT
     for i in cedict:
@@ -93,6 +84,10 @@ def search(word: str):
     result = sorted(temp, key=len)
     
     if result:
+        # Temp
+        Setting.temp_word = word
+        Setting.temp_result = result
+        
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
@@ -193,3 +188,20 @@ def pinyin(word: str):
         return result
     else:
         print("No matched record")
+
+def fun():
+    for f in globals().values():
+        if type(f) == types.FunctionType:
+            print(f)
+
+def lang(code: ['zh-CHT','zh-CHS']):
+    if code == 'zh-CHT':
+        Setting.language = 'zh-CHT'
+        print("Language changed to: " + Setting.language)
+        
+    elif code == 'zh-CHS':
+        Setting.language = 'zh-CHS'
+        print("Language changed to: " + Setting.language)
+        
+    else:
+        print("Language not supported")
