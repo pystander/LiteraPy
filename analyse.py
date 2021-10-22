@@ -59,7 +59,10 @@ def checklist(clauses: list):
     cklist = []
     
     for i in clauses:
-        if search(i):
+        for j in range(len(fq())):
+            key, value = list(fq().items())[j]
+
+        if search(i) or key in i:
             cklist.append(i)
     
     return cklist
