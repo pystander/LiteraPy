@@ -37,7 +37,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - [x] Temp for less time in re-search 
 
-- [ ] CPython Implementation to improve efficiency
+- [ ] CPython implementation to improve efficiency
 
 <br/>
 
