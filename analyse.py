@@ -23,9 +23,8 @@ class Setting:
 def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
     
-    # Empty input
     if txt == "":
-        return None;
+        return None
     
     clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
     temp = []
@@ -34,7 +33,7 @@ def analyse():
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause, use_paddle=True, HMM=True)
+        seg_list = jieba.lcut(clause, use_paddle=True, cut_all=True)
         temp.append(' '.join(seg_list))
         
     # Split into phrases
@@ -60,14 +59,11 @@ def analyse():
 def checklist(clauses: list):
     cklist = []
     
+    # Check if phrase in dict
     for i in clauses:
-        for j in range(len(fq())):
-            key, value = list(fq().items())[j]
-            
-        # Check if vocab in dict or learnt
-        if search(i) or key in i:
+        if search(i):
             cklist.append(i)
-    
+            
     return cklist
 
 def fq():
