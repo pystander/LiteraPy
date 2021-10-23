@@ -50,7 +50,7 @@ def search(word: str):
     size = len(word)
     matched = []
     t_start = time.time()
-        
+    
     # CEDICT
     for i in cedict:
         start = i.find(' ') + 1
