@@ -5,7 +5,7 @@
 # Import libraries
 import re
 import time
-import jieba # Package 'jieba' required
+import jieba
 import itertools
 import ast
 from litera import search
@@ -22,13 +22,15 @@ class Setting:
 # Define functions
 def analyse():
     txt = input("Enter the whole paragraph / sentence(s): \n")
+    
+    # Empty input
+    if txt == "":
+        return None;
+    
     clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）',txt)))
     temp = []
     result = []
     t_start = time.time()
-    
-    if txt == "":
-        return None;
     
     # Cut by jieba
     for clause in clauses:
@@ -62,6 +64,7 @@ def checklist(clauses: list):
         for j in range(len(fq())):
             key, value = list(fq().items())[j]
             
+        # Check if vocab in dict or learnt
         if search(i) or key in i:
             cklist.append(i)
     
