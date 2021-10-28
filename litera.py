@@ -25,27 +25,12 @@ with open('dict/filter.txt','r',encoding='utf-8') as f:
     filt = [line.rstrip('\n') for line in f]
     print("Filter loaded")
 
-# Default settings
-supported = ['zh-CHT','zh-CHS']
-
-class Setting:
-    language = 'zh-CHT' # Default language as 'zh-CHT'
-    temp_word = ''
-    temp_adword = ''
-    temp_result = []
-    temp_adresult = []
-    
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
-def search(word: str):
+def search(word: str, lang='zh-CHT'):
     # Empty input
     if word == "":
         return None
-    
-    # Temp
-    if word == Setting.temp_word:
-        print("Temp loaded for repeated search")
-        return Setting.temp_result
     
     size = len(word)
     matched = []
@@ -56,12 +41,11 @@ def search(word: str):
         start = i.find(' ') + 1
         
         # zh-CHT
-        if Setting.language == 'zh-CHT':
+        if lang == 'zh-CHT':
             if i.startswith(word) and not any(item in i for item in badword + filt):
-                matched.append(i[:start-1])
-                
+                matched.append(i[:start-1])     
         # zh-CHS
-        if Setting.language == 'zh-CHS':
+        elif lang == 'zh-CHS':
             if word == i[start:start+size] and not any(item in i for item in badword + filt):
                 end = start + i[start:].find(' ')
                 matched.append(i[start:end])
@@ -71,12 +55,11 @@ def search(word: str):
         start = i.find('\t') + 1
         
         # zh-CHT
-        if Setting.language == 'zh-CHT':
+        if lang == 'zh-CHT':
             if i.startswith(word):
                 matched.append(i[:start-1])
-                
         # zh-CHS
-        if Setting.language == 'zh-CHS':
+        elif lang == 'zh-CHS':
             if word == i[start:start+size]:
                 end = start + i[start:].find('\t')
                 matched.append(i[start:end])
@@ -86,25 +69,16 @@ def search(word: str):
     result = sorted(temp, key=len)
     
     if result:
-        # Temp
-        Setting.temp_word = word
-        Setting.temp_result = result
-        
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
     else:
         return None
 
-def adsearch(word: str):
+def adsearch(word: str, lang='zh-CHT'):
     # Empty input
     if word == "":
         return None
-    
-    # Temp
-    if word == Setting.temp_adword:
-        print("Temp loaded for repeated search")
-        return Setting.temp_adresult
     
     size = len(word)
     matched = []
@@ -115,12 +89,11 @@ def adsearch(word: str):
         start = i.find(' ') + 1
         
         # zh-CHT
-        if Setting.language == 'zh-CHT':
+        if lang == 'zh-CHT':
            if word in i[:start] and not any(item in i for item in badword + filt):
-                matched.append(i[:start-1])
-                
+                matched.append(i[:start-1])  
         # zh-CHS
-        if Setting.language == 'zh-CHS':
+        elif lang == 'zh-CHS':
             end = i[start:].find(' ') + start
             if word in i[start:end] and not any(item in i for item in badword + filt):
                 matched.append(i[start:end])
@@ -130,12 +103,11 @@ def adsearch(word: str):
         start = i.find('\t') + 1
         
         # zh-CHT
-        if Setting.language == 'zh-CHT':
+        if lang == 'zh-CHT':
             if word in i[:start]:
-                matched.append(i[:start-1])
-                
+                matched.append(i[:start-1])  
         # zh-CHS
-        if Setting.language == 'zh-CHS':
+        elif lang == 'zh-CHS':
             end = i[start:].find('\t') + start
             if word in i[start:end]:
                 matched.append(i[start:end])
@@ -145,10 +117,6 @@ def adsearch(word: str):
     result = sorted(temp, key=len)
     
     if result:
-        # Temp
-        Setting.temp_adword = word
-        Setting.temp_adresult = result
-        
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
         return result
@@ -205,15 +173,3 @@ def fun():
     for f in globals().values():
         if type(f) == types.FunctionType:
             print(f)
-
-def lang(code: ['zh-CHT','zh-CHS']):
-    if code == 'zh-CHT':
-        Setting.language = 'zh-CHT'
-        print("Language changed to: " + Setting.language)
-        
-    elif code == 'zh-CHS':
-        Setting.language = 'zh-CHS'
-        print("Language changed to: " + Setting.language)
-        
-    else:
-        print("Language not supported")
