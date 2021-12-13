@@ -6,17 +6,17 @@
 import re
 import time
 import jieba
+import json
 import itertools
 import ast
 from litera import search
 from collections import Counter
 
 # Load jieba settings
-jieba.enable_paddle()
 jieba.set_dictionary('dict/dict.txt')
 
 # Define functions
-def analyse(fq_mode=False, check_dict=False):
+def analyse(fq_mode=True, check_dict=False):
     txt = input("Enter the whole paragraph / sentence(s): \n")
     
     if txt == "":
@@ -36,22 +36,21 @@ def analyse(fq_mode=False, check_dict=False):
     for i in temp:
         result.append(i.split(' '))
         
+    # Match dictionary words
     if check_dict:
         result = checklist(list(itertools.chain(*result)))
     else:
         result = list(itertools.chain(*result))
         
-    result_fq = dict(Counter(result))
-    
     # Word frequency count
     if fq_mode:
-        with open('dict/frequency.txt',encoding='utf-8') as f:
-            fq = ast.literal_eval(f.read())
-            learnt = dict(Counter(fq) + Counter(result_fq))
+        with open('dict/frequency.json', 'r', encoding='utf-8') as fr:
+            fq = json.load(fr)
+            fq_dict = dict(Counter(result) + Counter(fq))
             
-            with open('dict/frequency.txt','r+',encoding='utf-8') as f:
-                f.write(str(learnt))
-                
+        with open('dict/frequency.json','w', encoding='utf-8') as fw:
+            json.dump(fq_dict, fw, indent=4)
+            
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Time interval: " + str(interval) + " seconds")
     return result
@@ -67,14 +66,11 @@ def checklist(clauses: list):
     return cklist
 
 def fq():
-    with open('dict/frequency.txt','r',encoding='utf-8') as f:
-        fq = ast.literal_eval(f.read())
+    with open('dict/frequency.json','r',encoding='utf-8') as fr:
+        fq = json.load(fr)
         return fq
 
 def initfq():
-    with open('dict/frequency.txt','r+',encoding='utf-8') as f:
-        data = f.read()
-        f.seek(0)
-        f.write('{}')
-        f.truncate()
+    with open('dict/frequency.json', 'w', encoding='utf-8') as fw:
+        json.dump({}, fw)
         print("Frequency file cleared")
