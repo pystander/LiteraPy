@@ -29,8 +29,12 @@ def analyse(fq_mode=True):
     
     # Cut by jieba
     for clause in clauses:
-        seg_list = jieba.lcut(clause, use_paddle=True, cut_all=True)
+        seg_list = jieba.lcut(clause, cut_all=True)
         temp.append(' '.join(seg_list))
+        
+    # Split into phrases
+    for i in temp:
+        result.append(i.split(' '))
         
     result = checklist(list(itertools.chain(*result)))
     result_fq = dict(Counter(result))

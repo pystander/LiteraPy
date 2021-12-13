@@ -1,9 +1,0 @@
-slang
-dialect
-county
-County
-district
-prefecture
-prefecture level city
-province
-crap!

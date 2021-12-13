@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# LiteraPy v1.0.9
+# LiteraPy v1.0.0
 # Copyright (c) 2021 pystander
 
 # Import libraries
@@ -8,22 +8,10 @@ import codecs
 import time
 import types
 
-# Load dictionaries
-with open('dict/cedict_ts.u8','r',encoding='utf-8') as f:
-    cedict = [line.rstrip('\n') for line in f]
-    print("CEDICT loaded")
-
+# Load dictionary
 with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
     cidian = [line.rstrip('\n') for line in f]
     print("Cidian loaded")
-
-with open('dict/bad-words.txt','r',encoding='utf-8') as f:
-    badword = [line.rstrip('\n') for line in f]
-    print("Bad words loaded")
-
-with open('dict/filter.txt','r',encoding='utf-8') as f:
-    filt = [line.rstrip('\n') for line in f]
-    print("Filter loaded")
 
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
@@ -36,20 +24,6 @@ def search(word: str, lang='zh-CHT'):
     matched = []
     t_start = time.time()
     
-    # CEDICT
-    for i in cedict:
-        start = i.find(' ') + 1
-        
-        # zh-CHT
-        if lang == 'zh-CHT':
-            if i.startswith(word) and not any(item in i for item in badword + filt):
-                matched.append(i[:start-1])     
-        # zh-CHS
-        elif lang == 'zh-CHS':
-            if word == i[start:start+size] and not any(item in i for item in badword + filt):
-                end = start + i[start:].find(' ')
-                matched.append(i[start:end])
-                
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
@@ -84,20 +58,6 @@ def adsearch(word: str, lang='zh-CHT'):
     matched = []
     t_start = time.time()
     
-    # CEDICT
-    for i in cedict:
-        start = i.find(' ') + 1
-        
-        # zh-CHT
-        if lang == 'zh-CHT':
-           if word in i[:start] and not any(item in i for item in badword + filt):
-                matched.append(i[:start-1])  
-        # zh-CHS
-        elif lang == 'zh-CHS':
-            end = i[start:].find(' ') + start
-            if word in i[start:end] and not any(item in i for item in badword + filt):
-                matched.append(i[start:end])
-                
     # Cidian
     for i in cidian:
         start = i.find('\t') + 1
@@ -139,26 +99,6 @@ def pinyin(word: str):
         if i.startswith(word + '\t') or word == i[start:start+end]:
             matched.append(i[start+end+1:])
             
-    # Search whole phrase in CEDICT
-    if not matched:
-        for i in cedict:
-            start = i.find(' ') + 1
-            end = i[start:].find(' ')
-            
-            if i.startswith(word + ' ') or word == i[start:start+end]:
-                start = i.find('[') + 1
-                end = i.find(']')
-                matched.append(i[start:end].lower())
-                
-    # If no matched, search per character
-    if not matched:
-        for i in cedict:
-            for ch in word:
-                if i.startswith(ch + ' ') or ' ' + ch + ' ' == i[1:4]:
-                    start = i.find('[') + 1
-                    end = i.find(']')
-                    matched.append(i[start:end].lower())
-                    
     temp = list(filter(None, list(dict.fromkeys(matched))))
     result = sorted(temp, key=len)
     
