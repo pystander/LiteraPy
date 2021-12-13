@@ -17,8 +17,6 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Optimization for clarity and efficiency
 
-- Bad words list ([LDNOOBW](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)) and customized filtering
-
 <br/>
 
 ## Installation
@@ -29,7 +27,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## To-do List
 
-- [x] Multi-character Pinyin search -> See [v1.0.3](https://github.com/pystander/LiteraPy/releases/tag/v1.0.3)
+- [x] Multi-character Pinyin search
 
 - [x] Identifier for Chinese part of speech (主謂賓 定狀補) -> [jieba](https://github.com/fxsjy/jieba)
 
@@ -51,6 +49,4 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 [1] [開放詞典](https://kaifangcidian.com/xiazai/)
 
-[2] [LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words: List of Dirty, Naughty, Obscene, and Otherwise Bad Words](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words)
-
-[3] [fxsjy/jieba: 结巴中文分词](https://github.com/fxsjy/jieba)
+[2] [fxsjy/jieba: 结巴中文分词](https://github.com/fxsjy/jieba)
