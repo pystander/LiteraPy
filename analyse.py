@@ -3,6 +3,7 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
+import sys
 import re
 import time
 import jieba
@@ -22,7 +23,7 @@ def analyse(fq_mode=True, check_dict=False):
     if txt == "":
         return None
     
-    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）|《|》',txt)))
+    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）|《|》|——|……',txt)))
     temp = []
     result = []
     t_start = time.time()
