@@ -6,11 +6,11 @@
 import sys
 import re
 import time
-import jieba
 import json
 import itertools
-import ast
-from litera import search
+import jieba
+import pycantonese
+from litera import search, adsearch
 from collections import Counter
 
 # Load jieba settings
