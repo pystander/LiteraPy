@@ -9,7 +9,6 @@ import time
 import json
 import itertools
 import jieba
-import pycantonese
 from litera import search, adsearch
 from collections import Counter
 
