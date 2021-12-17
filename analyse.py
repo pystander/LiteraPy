@@ -9,11 +9,11 @@ import time
 import json
 import itertools
 import jieba
-from litera import search, adsearch
+from litera import *
 from collections import Counter
 
 # Load jieba settings
-jieba.set_dictionary('dict/dict.txt')
+jieba.set_dictionary('dict/jieba_dict.txt')
 
 # Define functions
 def analyse(fq_mode=True, check_dict=False):
@@ -70,7 +70,16 @@ def fq():
         fq = json.load(fr)
         return fq
 
-def initfq():
+def init_fq():
     with open('dict/frequency.json', 'w', encoding='utf-8') as fw:
         json.dump({}, fw)
         print("Frequency file cleared")
+
+def search_fq(word: str):
+    with open('dict/frequency.json', 'r', encoding='utf-8') as fr:
+        fq = json.load(fr)
+
+        if word in fq:
+            return fq[word]
+        else:
+            print("Word not found")
