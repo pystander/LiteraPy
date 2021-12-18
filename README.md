@@ -11,7 +11,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - Built on external libraries (Currently based on [開放詞典](https://kaifangcidian.com/xiazai/))
 
-- Text segmentation with [jieba](https://github.com/fxsjy/jieba) and [paddlepaddle-tiny](https://pypi.org/project/paddlepaddle-tiny/)
+- Text segmentation with [jieba](https://github.com/fxsjy/jieba)
 
 - Vocabulary and Pinyin search
 
