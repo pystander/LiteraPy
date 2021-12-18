@@ -3,14 +3,23 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
-import json
+from litera import *
 
-def init_dict():
-    with open('dict/dict.json', 'r', encoding='utf-8') as f:
-        json.dump({}, f)
-        print("Dictionary cleared")
+dict_path = 'dict/dict.txt'
 
-def read():
-    with open('dict/dict.json', 'r', encoding='utf-8') as f:
-        rdict = json.load(f)
-        return rdict
+def mod(mode = 'r', data = ''):
+    if mode == 'i':
+        with open(dict_path, 'w', encoding='utf-8') as f:
+            f.write("")
+            print("Dictionary cleared")
+    elif mode == 'r':
+        with open(dict_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    elif mode == 'w':
+        with open(dict_path, 'w', encoding='utf-8') as f:
+            f.write(line)
+            print("Dictionary updated")
+    elif mode == 'a':
+        with open(dict_path, 'a', encoding='utf-8') as f:
+            f.write(line)
+            print("Dictionary appended")
