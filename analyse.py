@@ -13,11 +13,11 @@ from litera import *
 from collections import Counter
 
 # Settings
-jieba.set_dictionary('dict/jieba_dict.txt')
 fq_path = 'dict/frequency.json'
+jieba.set_dictionary('dict/jieba_dict.txt')
 
 # Define functions
-def analyse(fq_mode=True, check_dict=False):
+def analyse(fq_mode=False, check_dict=False):
     txt = input("Enter the whole paragraph / sentence(s): \n")
     
     if txt == "":

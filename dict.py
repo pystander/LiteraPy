@@ -7,7 +7,7 @@ from litera import *
 
 dict_path = 'dict/dict.txt'
 
-def mod(mode = 'r', data = ''):
+def dmod(mode = 'r', data = ''):
     if mode == 'i':
         with open(dict_path, 'w', encoding='utf-8') as f:
             f.write("")
@@ -15,11 +15,7 @@ def mod(mode = 'r', data = ''):
     elif mode == 'r':
         with open(dict_path, 'r', encoding='utf-8') as f:
             return f.read()
-    elif mode == 'w':
-        with open(dict_path, 'w', encoding='utf-8') as f:
-            f.write(line)
+    elif mode == 'w' or 'a':
+        with open(dict_path, mode, encoding='utf-8') as f:
+            f.write(data)
             print("Dictionary updated")
-    elif mode == 'a':
-        with open(dict_path, 'a', encoding='utf-8') as f:
-            f.write(line)
-            print("Dictionary appended")
