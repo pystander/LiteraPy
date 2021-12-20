@@ -71,12 +71,9 @@ def fq(mode = 'r', word = None):
         with open(fq_path, 'w', encoding='utf-8') as f:
             json.dump({}, f)
             print("Frequency file cleared")
-            
     elif mode == 'r':
         with open(fq_path,'r',encoding='utf-8') as f:
-            fq = json.load(f)
-            return fq
-        
+            return json.load(f)
     elif mode == 's':
         with open(fq_path, 'r', encoding='utf-8') as f:
             fq = json.load(f)
