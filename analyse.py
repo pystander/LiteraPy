@@ -56,7 +56,7 @@ def analyse(fq_mode: bool=False, check_dict: bool=False):
     print("Time interval: " + str(interval) + " seconds")
     return result
 
-def checklist(clause_list: list):
+def checklist(clauses: list):
     cklist = []
     
     # Check if phrase in dict
