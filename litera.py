@@ -42,6 +42,7 @@ def search(word: str, lang: str='zh-CHT'):
     temp = list(filter(None, list(dict.fromkeys(matched))))
     result = sorted(temp, key=len)
     
+    # Output search results
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
@@ -76,6 +77,7 @@ def adsearch(word: str, lang: str='zh-CHT'):
     temp = list(filter(None, list(dict.fromkeys(matched))))
     result = sorted(temp, key=len)
     
+    # Output search results
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
@@ -99,9 +101,11 @@ def pinyin(word: str):
         if i.startswith(word + '\t') or word == i[start:start+end]:
             matched.append(i[start+end+1:])
             
+    # Optimize results
     temp = list(filter(None, list(dict.fromkeys(matched))))
     result = sorted(temp, key=len)
     
+    # Output search results
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
