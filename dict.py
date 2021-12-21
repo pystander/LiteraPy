@@ -21,9 +21,11 @@ def dmod(mode = 'r', data = ''):
     elif mode == 'w' or mode == 'a':
         with open(dict_path, mode, encoding='utf-8') as f:
             f.write(data + '\n')
+            print("Dictionary appended")
 
 def parser(dict_list: list, delimiter: str, new_delimiter: str):
-    for i in range(len(dict_list)): 
-        dmod('a', dict_list[i].replace(delimiter, new_delimiter))
-        
+    with open(dict_path, 'a', encoding='utf-8') as f:
+        for i in range(len(dict_list)):
+            f.write(dict_list[i].replace(delimiter, new_delimiter) + '\n')
+    
     print("Dictionary file updated")
