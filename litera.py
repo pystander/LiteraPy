@@ -15,7 +15,7 @@ with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
 
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
-def search(word: str, lang='zh-CHT'):
+def search(word: str, lang: str='zh-CHT'):
     # Empty input
     if word == "":
         return None
@@ -49,9 +49,9 @@ def search(word: str, lang='zh-CHT'):
     else:
         return None
 
-def adsearch(word: str, lang='zh-CHT'):
+def adsearch(word: str, lang: str='zh-CHT'):
     # Empty input
-    if word == "":
+    if word == '':
         return None
     
     size = len(word)

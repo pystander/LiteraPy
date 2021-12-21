@@ -17,7 +17,7 @@ fq_path = 'dict/frequency.json'
 jieba.set_dictionary('dict/jieba_dict.txt')
 
 # Define functions
-def analyse(fq_mode=False, check_dict=False):
+def analyse(fq_mode: bool=False, check_dict: bool=False):
     txt = input("Enter the whole paragraph / sentence(s): \n")
     
     if txt == "":
@@ -56,7 +56,7 @@ def analyse(fq_mode=False, check_dict=False):
     print("Time interval: " + str(interval) + " seconds")
     return result
 
-def checklist(clauses: list):
+def checklist(clause_list: list):
     cklist = []
     
     # Check if phrase in dict
@@ -66,7 +66,7 @@ def checklist(clauses: list):
             
     return cklist
 
-def fq(mode = 'r', word = None):
+def fq(mode: str='r', word: str=None):
     if mode == 'i':
         with open(fq_path, 'w', encoding='utf-8') as f:
             json.dump({}, f)
