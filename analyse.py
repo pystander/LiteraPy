@@ -67,13 +67,16 @@ def checklist(clauses: list):
     return cklist
 
 def fq(mode: str='r', word: str=None):
+    # Initialize
     if mode == 'i':
         with open(fq_path, 'w', encoding='utf-8') as f:
             json.dump({}, f)
             print("Frequency file cleared")
+    # Read
     elif mode == 'r':
         with open(fq_path,'r',encoding='utf-8') as f:
             return json.load(f)
+    # Search
     elif mode == 's':
         with open(fq_path, 'r', encoding='utf-8') as f:
             fq = json.load(f)
