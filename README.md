@@ -33,7 +33,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 - [ ] AI / algorithms with word suggestions (e.g. HMM & Viterbi)
 
-- [ ] CPython implementation to improve efficiency
+- [ ] Text-to-Speech
 
 <br/>
 
