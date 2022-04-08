@@ -14,16 +14,18 @@ def dmod(mode: str='r', data: str=''):
         with open(dict_path, 'w', encoding='utf-8') as f:
             f.write("")
             print("Dictionary cleared")
+
     # Read
     elif mode == 'r':
         with open(dict_path, 'r', encoding='utf-8') as f:
             return f.read()
+
     # Write / Append
     elif mode == 'w' or mode == 'a':
         if data == "":
             print("Missing line to be added")
             return None
-        
+
         with open(dict_path, mode, encoding='utf-8') as f:
             f.write(data + '\n')
             print("Dictionary updated")
@@ -31,19 +33,19 @@ def dmod(mode: str='r', data: str=''):
 def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
     t_start = time.time()
     add_list = []
-    
+
     with open(dict_path, 'r', encoding='utf-8') as f:
         origin_list = f.readlines()
-        
+
     for i in range(len(dict_list)):
         add_list.append(dict_list[i].replace(delimiter, new_delimiter))
-        
+
     add_list = origin_list + add_list
     add_list.sort()
-    
+
     with open(dict_path, 'a', encoding='utf-8') as f:
         for line in add_list:
             f.write(line + '\n')
-            
+
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Dictionary file updated (" + str(interval) + " seconds)")
