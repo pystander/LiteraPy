@@ -13,7 +13,7 @@ from litera import *
 from collections import Counter
 
 # Settings
-fq_path = 'dict/frequency.json'
+fq_path = 'data/frequency.json'
 jieba.set_dictionary('dict/jieba_dict.txt')
 
 # Define functions
