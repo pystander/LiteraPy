@@ -4,20 +4,19 @@
 
 # Import libraries
 import time
-from litera import *
 
-dict_path = 'dict/dict.txt'
+DICT_PATH = 'dict/dict.txt'
 
 def dmod(mode: str='r', data: str=''):
     # Initialize
     if mode == 'i':
-        with open(dict_path, 'w', encoding='utf-8') as f:
+        with open(DICT_PATH, 'w', encoding='utf-8') as f:
             f.write("")
             print("Dictionary cleared")
 
     # Read
     elif mode == 'r':
-        with open(dict_path, 'r', encoding='utf-8') as f:
+        with open(DICT_PATH, 'r', encoding='utf-8') as f:
             return f.read()
 
     # Write / Append
@@ -26,7 +25,7 @@ def dmod(mode: str='r', data: str=''):
             print("Missing line to be added")
             return None
 
-        with open(dict_path, mode, encoding='utf-8') as f:
+        with open(DICT_PATH, mode, encoding='utf-8') as f:
             f.write(data + '\n')
             print("Dictionary updated")
 
@@ -34,7 +33,7 @@ def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
     t_start = time.time()
     add_list = []
 
-    with open(dict_path, 'r', encoding='utf-8') as f:
+    with open(DICT_PATH, 'r', encoding='utf-8') as f:
         origin_list = f.readlines()
 
     for i in range(len(dict_list)):
@@ -43,7 +42,7 @@ def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
     add_list = origin_list + add_list
     add_list.sort()
 
-    with open(dict_path, 'a', encoding='utf-8') as f:
+    with open(DICT_PATH, 'a', encoding='utf-8') as f:
         for line in add_list:
             f.write(line + '\n')
 

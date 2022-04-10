@@ -3,8 +3,6 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
-import re
-import codecs
 import time
 import types
 
@@ -55,7 +53,6 @@ def adsearch(word: str, lang: str='zh-CHT'):
     if word == '':
         return None
 
-    size = len(word)
     matched = []
     t_start = time.time()
 
@@ -86,7 +83,6 @@ def adsearch(word: str, lang: str='zh-CHT'):
         print("No matched record")
 
 def pinyin(word: str):
-    char =[]
     matched = []
     t_start = time.time()
 

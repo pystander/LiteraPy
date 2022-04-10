@@ -24,13 +24,13 @@ class UI(QMainWindow):
         adresult = litera.adsearch(text)
 
         if result != None:
-            self.search_label.setText(", ".join(result[:10]))
+            self.search_label.setText(' '.join(result[:10]))
             self.search_label.adjustSize()
         else:
             self.search_label.setText("")
 
         if adresult != None:
-            self.adsearch_label.setText(", ".join(adresult[:10]))
+            self.adsearch_label.setText(' '.join(adresult[:10]))
             self.adsearch_label.adjustSize()
         else:
             self.adsearch_label.setText("")

@@ -3,7 +3,6 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
-import sys
 import re
 import time
 import json
@@ -13,7 +12,7 @@ from litera import *
 from collections import Counter
 
 # Settings
-fq_path = 'data/frequency.json'
+FQ_PATH = 'data/frequency.json'
 jieba.set_dictionary('dict/jieba_dict.txt')
 
 # Define functions
@@ -23,7 +22,7 @@ def analyse(fq_mode: bool=False, check_dict: bool=False):
     if txt == "":
         return None
 
-    clauses = list(filter(None,re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）|《|》|——|……',txt)))
+    clauses = list(filter(None, re.split('。|，|；|：|、|？|！|「|」|“ |”|（|）|《|》|——|……', txt)))
     temp = []
     result = []
     t_start = time.time()
@@ -45,11 +44,11 @@ def analyse(fq_mode: bool=False, check_dict: bool=False):
 
     # Word frequency count
     if fq_mode:
-        with open('dict/frequency.json', 'r', encoding='utf-8') as fr:
+        with open(FQ_PATH, 'r', encoding='utf-8') as fr:
             fq = json.load(fr)
             fq_dict = dict(Counter(result) + Counter(fq))
 
-        with open('dict/frequency.json','w', encoding='utf-8') as fw:
+        with open(FQ_PATH, 'w', encoding='utf-8') as fw:
             json.dump(fq_dict, fw, ensure_ascii=False, sort_keys=True, indent=4)
 
     interval = '{0:.3f}'.format(time.time() - t_start)
@@ -69,16 +68,16 @@ def checklist(clauses: list):
 def fq(mode: str='r', word: str=None):
     # Initialize
     if mode == 'i':
-        with open(fq_path, 'w', encoding='utf-8') as f:
+        with open(FQ_PATH, 'w', encoding='utf-8') as f:
             json.dump({}, f)
             print("Frequency file cleared")
     # Read
     elif mode == 'r':
-        with open(fq_path,'r',encoding='utf-8') as f:
+        with open(FQ_PATH,'r',encoding='utf-8') as f:
             return json.load(f)
     # Search
     elif mode == 's':
-        with open(fq_path, 'r', encoding='utf-8') as f:
+        with open(FQ_PATH, 'r', encoding='utf-8') as f:
             fq = json.load(f)
 
             if word in fq:
