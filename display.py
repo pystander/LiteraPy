@@ -6,7 +6,7 @@
 import litera
 import sys
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 UI_PATH = 'interface.ui'
 
@@ -24,16 +24,14 @@ class UI(QMainWindow):
         adresult = litera.adsearch(text)
 
         if result != None:
-            self.search_label.setText(' '.join(result[:10]))
-            self.search_label.adjustSize()
+            self.search_browser.setText('\n'.join(result))
         else:
-            self.search_label.setText("")
+            self.search_browser.setText("")
 
         if adresult != None:
-            self.adsearch_label.setText(' '.join(adresult[:10]))
-            self.adsearch_label.adjustSize()
+            self.adsearch_browser.setText('\n'.join(adresult))
         else:
-            self.adsearch_label.setText("")
+            self.adsearch_browser.setText("")
 
 def main():
     app = QApplication(sys.argv)

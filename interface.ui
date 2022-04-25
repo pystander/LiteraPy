@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>795</width>
+    <width>798</width>
     <height>576</height>
    </rect>
   </property>
@@ -14,32 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="search_label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>451</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="adsearch_label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>451</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="input">
     <property name="geometry">
      <rect>
@@ -49,8 +23,46 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="placeholderText">
      <string>搜尋中文字詞</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="adsearch_browser">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>50</y>
+      <width>381</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="search_browser">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>381</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
    </widget>
   </widget>
@@ -59,8 +71,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>795</width>
-     <height>22</height>
+     <width>798</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
