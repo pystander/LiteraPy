@@ -6,20 +6,21 @@ import requests
 from bs4 import BeautifulSoup
 
 # 漢語多功能字庫
-CHAR = "測"
-URL = "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=" + CHAR
+URL = "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word="
 
-response = requests.get(URL)
-soup = BeautifulSoup(response.content, 'html.parser')
+def define(char):
+    search_URL = URL + char
+    response = requests.get(search_URL)
+    soup = BeautifulSoup(response.content, 'html.parser')
 
-arr = []
+    arr = []
 
-for tag in soup.find_all('tr', class_='greyTr'):
-    for i in tag.text.split('\n'):
-        i.replace('\n', '')
+    for tag in soup.find_all('tr', class_='greyTr'):
+        for i in tag.text.split('\n'):
+            i.replace('\n', '')
 
-        if i != '':
-            arr.append(i)
+            if i != '':
+                arr.append(i)
 
-print(arr[1])
-print(arr[3])
+    print(arr[1])
+    print(arr[3])
