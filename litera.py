@@ -35,9 +35,14 @@ def search(word: str, lang: str='zh-CHT'):
         return None
 
     size = len(word)
-    start, end = idx(word)
     matched = []
     t_start = time.time()
+
+    # Try search by index; else search all
+    try:
+        start, end = idx(word)
+    except:
+        start, end = 0, size-1
 
     # Cidian
     for i in cidian[start:end]:
