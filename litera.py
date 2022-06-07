@@ -32,26 +32,37 @@ def search(word: str, lang: str='zh-CHT'):
     # Try search by index; else search all
     try:
         start, end = idx_dict[word]
+
+        for i in cidian[start:end]:
+            tap = i.find('\t') + 1
+
+            # zh-CHT
+            if lang == 'zh-CHT':
+                matched.append(i[:tap-1])
+            # zh-CHS
+            elif lang == 'zh-CHS':
+                if word == i[tap:tap+size]:
+                    end = tap + i[tap:].find('\t')
+                    matched.append(i[tap:end])
+
     except:
         start, end = 0, size-1
 
-    # Cidian
-    for i in cidian[start:end]:
-        start = i.find('\t') + 1
+        for i in cidian[start:end]:
+            start = i.find('\t') + 1
 
-        # zh-CHT
-        if lang == 'zh-CHT':
-            if i.startswith(word):
-                matched.append(i[:start-1])
-        # zh-CHS
-        elif lang == 'zh-CHS':
-            if word == i[start:start+size]:
-                end = start + i[start:].find('\t')
-                matched.append(i[start:end])
+            # zh-CHT
+            if lang == 'zh-CHT':
+                if i.startswith(word):
+                    matched.append(i[:start-1])
+            # zh-CHS
+            elif lang == 'zh-CHS':
+                if word == i[start:start+size]:
+                    end = start + i[start:].find('\t')
+                    matched.append(i[start:end])
 
     # Optimize results
-    temp = list(filter(None, list(dict.fromkeys(matched))))
-    result = sorted(temp, key=len)
+    result = sorted(matched, key=len)
 
     # Output search results
     if result:
