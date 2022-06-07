@@ -3,34 +3,23 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
+import ast
 import time
 
 DICT_PATH = 'dict/dict.txt'
+IDX_PATH = 'dict/index.txt'
 
-# Load dictionary
-with open(DICT_PATH,'r',encoding='utf-8') as f:
+# Load dictionary and index table
+with open(DICT_PATH, 'r', encoding='utf-8') as f:
     cidian = [line.rstrip('\n') for line in f]
     print("Cidian loaded")
 
+with open(IDX_PATH, 'r', encoding='utf-8') as f:
+    idx_dict = ast.literal_eval(f.read())
+    print("Search index loaded")
+
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
-def idx(word: str):
-    start = end = 0
-
-    # Start index
-    for i, line in enumerate(cidian):
-        if line.startswith(word):
-            start = i
-            break
-
-    # End index
-    for i, line in enumerate(cidian[start:]):
-        if not line.startswith(word):
-            end = start + i
-            break
-
-    return start, end
-
 def search(word: str, lang: str='zh-CHT'):
     # Empty input
     if word == "":
@@ -42,7 +31,7 @@ def search(word: str, lang: str='zh-CHT'):
 
     # Try search by index; else search all
     try:
-        start, end = idx(word)
+        start, end = idx_dict[word]
     except:
         start, end = 0, size-1
 

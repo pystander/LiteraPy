@@ -3,9 +3,20 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
+import ast
 import time
 
 DICT_PATH = 'dict/dict.txt'
+IDX_PATH = 'dict/index.txt'
+
+# Load dictionary and index table
+with open(DICT_PATH, 'r', encoding='utf-8') as f:
+    cidian = [line.rstrip('\n') for line in f]
+    print("Cidian loaded")
+
+with open(IDX_PATH, 'r', encoding='utf-8') as f:
+    idx_dict = ast.literal_eval(f.read())
+    print("Search index loaded")
 
 def dmod(mode: str='r', data: str=''):
     # Initialize
@@ -48,3 +59,31 @@ def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
 
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Dictionary file updated (" + str(interval) + " seconds)")
+
+def idx(word: str):
+    start = end = 0
+
+    # Start index
+    for i, line in enumerate(cidian):
+        if line.startswith(word):
+            start = i
+            break
+
+    # End index
+    for i, line in enumerate(cidian[start:]):
+        if not line.startswith(word):
+            end = start + i
+            break
+
+    return start, end
+
+def idx_update():
+    idx_dict = {}
+
+    for line in cidian:
+        if line and line[0] not in idx_dict:
+            idx_dict[line[0]] = idx(line[0])
+
+    with open(IDX_PATH, 'w', encoding='utf-8') as f:
+        f.write(str(idx_dict))
+        print("Index table updated")
