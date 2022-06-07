@@ -48,3 +48,5 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 [1] [開放詞典](https://kaifangcidian.com/xiazai/)
 
 [2] [fxsjy/jieba: 结巴中文分词](https://github.com/fxsjy/jieba)
+
+[3] [漢語多功能字庫 Multi-function Chinese Character Database](https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/)
