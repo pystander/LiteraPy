@@ -4,26 +4,43 @@
 
 # Import libraries
 import time
-import types
+
+DICT_PATH = 'dict/dict.txt'
 
 # Load dictionary
-with open('dict/cidian_zhzh-kfcd-2021524.txt','r',encoding='utf-8') as f:
+with open(DICT_PATH,'r',encoding='utf-8') as f:
     cidian = [line.rstrip('\n') for line in f]
     print("Cidian loaded")
 
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
+def idx(word: str):
+    # Start index
+    for i, line in enumerate(cidian):
+        if line.startswith(word):
+            start = i
+            break
+
+    # End index
+    for i, line in enumerate(cidian[start+1:]):
+        if not line.startswith(word):
+            end = start + i
+            break
+
+    return start, end
+
 def search(word: str, lang: str='zh-CHT'):
     # Empty input
     if word == "":
         return None
 
     size = len(word)
+    start, end = idx(word)
     matched = []
     t_start = time.time()
 
     # Cidian
-    for i in cidian:
+    for i in cidian[start:end]:
         start = i.find('\t') + 1
 
         # zh-CHT
@@ -108,8 +125,3 @@ def pinyin(word: str):
         return result
     else:
         print("No matched record")
-
-def fun():
-    for f in globals().values():
-        if type(f) == types.FunctionType:
-            print(f)
