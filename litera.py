@@ -15,6 +15,8 @@ with open(DICT_PATH,'r',encoding='utf-8') as f:
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
 def idx(word: str):
+    start = end = 0
+
     # Start index
     for i, line in enumerate(cidian):
         if line.startswith(word):
@@ -22,7 +24,7 @@ def idx(word: str):
             break
 
     # End index
-    for i, line in enumerate(cidian[start+1:]):
+    for i, line in enumerate(cidian[start:]):
         if not line.startswith(word):
             end = start + i
             break
