@@ -19,7 +19,6 @@ with open(IDX_PATH, 'r', encoding='utf-8') as f:
     print("Index table loaded")
 
 # Define functions
-# Match-case will be introduced in Python 3.10 -> menu() to be added
 def search(word: str, lang: str='zh-CHT'):
     # Empty input
     if word == "":
@@ -44,23 +43,22 @@ def search(word: str, lang: str='zh-CHT'):
                 matched.append(line[:tap-1])
             # zh-CHS
             elif lang == 'zh-CHS':
-                if word == line[tap:tap+size]:
-                    end = tap + line[tap:].find('\t')
-                    matched.append(line[tap:end])
+                end = tap + line[tap:].find('\t')
+                matched.append(line[tap:end])
 
     except:
         for line in cidian:
-            start = line.find('\t') + 1
+            tap = line.find('\t') + 1
 
             # zh-CHT
             if lang == 'zh-CHT':
                 if line.startswith(word):
-                    matched.append(line[:start-1])
+                    matched.append(line[:tap-1])
             # zh-CHS
             elif lang == 'zh-CHS':
-                if word == line[start:start+size]:
-                    end = start + line[start:].find('\t')
-                    matched.append(line[start:end])
+                if word == line[tap:tap+size]:
+                    end = tap + line[tap:].find('\t')
+                    matched.append(line[tap:end])
 
     # Optimize results
     result = sorted(matched, key=len)
@@ -83,17 +81,18 @@ def adsearch(word: str, lang: str='zh-CHT'):
 
     # Cidian
     for line in cidian:
-        start = line.find('\t') + 1
+        tap = line.find('\t') + 1
 
         # zh-CHT
         if lang == 'zh-CHT':
-            if word in line[:start]:
-                matched.append(line[:start-1])
+            if word in line[:tap]:
+                matched.append(line[:tap-1])
         # zh-CHS
         elif lang == 'zh-CHS':
-            end = line[start:].find('\t') + start
-            if word in line[start:end]:
-                matched.append(line[start:end])
+            end = tap + line[tap:].find('\t')
+
+            if word in line[tap:end]:
+                matched.append(line[tap:end])
 
     # Optimize results
     temp = list(filter(None, list(dict.fromkeys(matched))))
