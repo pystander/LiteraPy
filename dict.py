@@ -60,18 +60,22 @@ def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Dictionary file updated (" + str(interval) + " seconds)")
 
-def idx(word: str):
+def idx(word_CHT: str, word_CHS: str):
     start = end = 0
 
     # Start index
     for i, line in enumerate(cidian):
-        if line.startswith(word):
+        tap = line.find('\t') + 1
+
+        if line.startswith(word_CHT) and line[tap:].startswith(word_CHS):
             start = i
             break
 
     # End index
     for i, line in enumerate(cidian[start:]):
-        if not line.startswith(word):
+        tap = line.find('\t') + 1
+
+        if not line.startswith(word_CHT) or not line[tap:].startswith(word_CHS):
             end = start + i
             break
 
@@ -81,9 +85,15 @@ def idx_update():
     idx_dict = {}
 
     for line in cidian:
-        if line and line[0] not in idx_dict:
-            idx_dict[line[0]] = idx(line[0])
+        if line:
+            tap = line.find('\t') + 1
+            key_CHT, key_CHS = line[0], line[tap]
+
+            if (key_CHT, key_CHS) not in idx_dict:
+                idx_dict[(key_CHT, key_CHS)] = idx(key_CHT, key_CHS)
 
     with open(IDX_PATH, 'w', encoding='utf-8') as f:
         f.write(str(idx_dict))
         print("Index table updated")
+
+idx_update()

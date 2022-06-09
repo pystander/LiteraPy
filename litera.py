@@ -31,33 +31,36 @@ def search(word: str, lang: str='zh-CHT'):
 
     # Try search by index; else search all
     try:
-        start, end = idx_dict[word]
+        for key in idx_dict:
+            if word in key:
+                start, end = idx_dict[key]
+                break
 
-        for i in cidian[start:end]:
-            tap = i.find('\t') + 1
+        for line in cidian[start:end]:
+            tap = line.find('\t') + 1
 
             # zh-CHT
             if lang == 'zh-CHT':
-                matched.append(i[:tap-1])
+                matched.append(line[:tap-1])
             # zh-CHS
             elif lang == 'zh-CHS':
-                if word == i[tap:tap+size]:
-                    end = tap + i[tap:].find('\t')
-                    matched.append(i[tap:end])
+                if word == line[tap:tap+size]:
+                    end = tap + line[tap:].find('\t')
+                    matched.append(line[tap:end])
 
     except:
-        for i in cidian:
-            start = i.find('\t') + 1
+        for line in cidian:
+            start = line.find('\t') + 1
 
             # zh-CHT
             if lang == 'zh-CHT':
-                if i.startswith(word):
-                    matched.append(i[:start-1])
+                if line.startswith(word):
+                    matched.append(line[:start-1])
             # zh-CHS
             elif lang == 'zh-CHS':
-                if word == i[start:start+size]:
-                    end = start + i[start:].find('\t')
-                    matched.append(i[start:end])
+                if word == line[start:start+size]:
+                    end = start + line[start:].find('\t')
+                    matched.append(line[start:end])
 
     # Optimize results
     result = sorted(matched, key=len)
@@ -79,18 +82,18 @@ def adsearch(word: str, lang: str='zh-CHT'):
     t_start = time.time()
 
     # Cidian
-    for i in cidian:
-        start = i.find('\t') + 1
+    for line in cidian:
+        start = line.find('\t') + 1
 
         # zh-CHT
         if lang == 'zh-CHT':
-            if word in i[:start]:
-                matched.append(i[:start-1])
+            if word in line[:start]:
+                matched.append(line[:start-1])
         # zh-CHS
         elif lang == 'zh-CHS':
-            end = i[start:].find('\t') + start
-            if word in i[start:end]:
-                matched.append(i[start:end])
+            end = line[start:].find('\t') + start
+            if word in line[start:end]:
+                matched.append(line[start:end])
 
     # Optimize results
     temp = list(filter(None, list(dict.fromkeys(matched))))
@@ -112,12 +115,12 @@ def pinyin(word: str):
         return None
 
     # Search whole phrase in Cidian
-    for i in cidian:
-        start = i.find('\t') + 1
-        end = i[start:].find('\t')
+    for line in cidian:
+        start = line.find('\t') + 1
+        end = line[start:].find('\t')
 
-        if i.startswith(word + '\t') or word == i[start:start+end]:
-            matched.append(i[start+end+1:])
+        if line.startswith(word + '\t') or word == line[start:start+end]:
+            matched.append(line[start+end+1:])
 
     # Optimize results
     temp = list(filter(None, list(dict.fromkeys(matched))))
