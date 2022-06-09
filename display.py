@@ -3,9 +3,9 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
-import litera
 import sys
-from PyQt5 import uic
+import litera
+from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 UI_PATH = 'interface.ui'
@@ -16,12 +16,15 @@ class UI(QMainWindow):
         super(UI, self).__init__()
         uic.loadUi(UI_PATH, self)
 
-        # Events
-        self.input.textChanged[str].connect(self.inputSearch)
+        self.lang = 'zh-CHT'
 
-    def inputSearch(self, text):
-        result = litera.search(text)
-        adresult = litera.adsearch(text)
+        # Events
+        self.input.textChanged[str].connect(self.input_search)
+        self.lang_chs.stateChanged.connect(self.lang_state)
+
+    def input_search(self, text):
+        result = litera.search(text, self.lang)
+        adresult = litera.adsearch(text, self.lang)
 
         if result != None:
             self.search_browser.setText('\n'.join(result))
@@ -32,6 +35,16 @@ class UI(QMainWindow):
             self.adsearch_browser.setText('\n'.join(adresult))
         else:
             self.adsearch_browser.setText("")
+
+    def lang_state(self, state):
+        if state == QtCore.Qt.Checked:
+            self.lang = 'zh-CHS'
+        else:
+            self.lang = 'zh-CHT'
+
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+            self.close()
 
 def main():
     app = QApplication(sys.argv)
