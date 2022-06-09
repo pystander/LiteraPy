@@ -2,6 +2,7 @@
 # LiteraPy v1.0.0
 # Copyright (c) 2021 pystander
 
+# Import libraries
 import requests
 from bs4 import BeautifulSoup
 
