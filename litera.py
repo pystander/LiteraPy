@@ -95,8 +95,7 @@ def adsearch(word: str, lang: str='zh-CHT'):
                 matched.append(line[tap:end])
 
     # Optimize results
-    temp = list(filter(None, list(dict.fromkeys(matched))))
-    result = sorted(temp, key=len)
+    result = sorted(matched, key=len)
 
     # Output search results
     if result:
@@ -107,28 +106,25 @@ def adsearch(word: str, lang: str='zh-CHT'):
         print("No matched record")
 
 def pinyin(word: str):
-    matched = []
-    t_start = time.time()
-
     if word == "":
         return None
 
+    result = ""
+    t_start = time.time()
+
     # Search whole phrase in Cidian
     for line in cidian:
-        start = line.find('\t') + 1
-        end = line[start:].find('\t')
+        tap = line.find('\t') + 1
+        tap2 = line[tap:].find('\t')
 
-        if line.startswith(word + '\t') or word == line[start:start+end]:
-            matched.append(line[start+end+1:])
-
-    # Optimize results
-    temp = list(filter(None, list(dict.fromkeys(matched))))
-    result = sorted(temp, key=len)
+        if line.startswith(word + '\t') or word == line[tap:tap+tap2]:
+            result = line[tap+tap2+1:]
+            break
 
     # Output search results
     if result:
         interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Total of " + str(len(result)) + " record(s) (" + str(interval) + " seconds)")
+        print("Record found (" + str(interval) + " seconds)")
         return result
     else:
         print("No matched record")
