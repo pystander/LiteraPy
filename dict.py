@@ -95,5 +95,3 @@ def idx_update():
     with open(IDX_PATH, 'w', encoding='utf-8') as f:
         f.write(str(idx_dict))
         print("Index table updated")
-
-idx_update()
