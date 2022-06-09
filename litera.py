@@ -16,7 +16,7 @@ with open(DICT_PATH, 'r', encoding='utf-8') as f:
 
 with open(IDX_PATH, 'r', encoding='utf-8') as f:
     idx_dict = ast.literal_eval(f.read())
-    print("Search index loaded")
+    print("Index table loaded")
 
 # Define functions
 # Match-case will be introduced in Python 3.10 -> menu() to be added
@@ -46,9 +46,7 @@ def search(word: str, lang: str='zh-CHT'):
                     matched.append(i[tap:end])
 
     except:
-        start, end = 0, size-1
-
-        for i in cidian[start:end]:
+        for i in cidian:
             start = i.find('\t') + 1
 
             # zh-CHT
