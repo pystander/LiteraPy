@@ -16,9 +16,7 @@ FQ_PATH = 'data/frequency.json'
 jieba.set_dictionary('dict/jieba_dict.txt')
 
 # Define functions
-def analyse(fq_mode: bool=False, check_dict: bool=False):
-    txt = input("Enter the whole paragraph / sentence(s): \n")
-
+def analyse(txt: str, fq_mode: bool=False, check_dict: bool=False):
     if txt == "":
         return None
 
