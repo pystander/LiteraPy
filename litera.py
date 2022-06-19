@@ -3,11 +3,11 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
-import ast
 import time
+import json
 
 DICT_PATH = 'dict/dict.txt'
-IDX_PATH = 'dict/index.txt'
+IDX_PATH = 'dict/index.json'
 
 # Load dictionary and index table
 with open(DICT_PATH, 'r', encoding='utf-8') as f:
@@ -15,7 +15,7 @@ with open(DICT_PATH, 'r', encoding='utf-8') as f:
     print("Cidian loaded")
 
 with open(IDX_PATH, 'r', encoding='utf-8') as f:
-    idx_dict = ast.literal_eval(f.read())
+    idx_dict = json.load(f)
     print("Index table loaded")
 
 # Define functions
@@ -32,6 +32,7 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
         for key in idx_dict:
             if word in key:
                 start, end = idx_dict[key]
+                print("Index existed")
                 break
 
         for line in cidian[start:end]:

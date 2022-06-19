@@ -3,11 +3,11 @@
 # Copyright (c) 2021 pystander
 
 # Import libraries
-import ast
 import time
+import json
 
 DICT_PATH = 'dict/dict.txt'
-IDX_PATH = 'dict/index.txt'
+IDX_PATH = 'dict/index.json'
 
 # Load dictionary and index table
 with open(DICT_PATH, 'r', encoding='utf-8') as f:
@@ -15,7 +15,7 @@ with open(DICT_PATH, 'r', encoding='utf-8') as f:
     print("Cidian loaded")
 
 with open(IDX_PATH, 'r', encoding='utf-8') as f:
-    idx_dict = ast.literal_eval(f.read())
+    idx_dict = json.load(f)
     print("Search index loaded")
 
 def dmod(mode: str='r', data: str=''):
@@ -41,8 +41,8 @@ def dmod(mode: str='r', data: str=''):
             print("Dictionary updated")
 
 def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
-    t_start = time.time()
     add_list = []
+    t_start = time.time()
 
     with open(DICT_PATH, 'r', encoding='utf-8') as f:
         origin_list = f.readlines()
@@ -83,15 +83,20 @@ def idx(word_CHT: str, word_CHS: str):
 
 def idx_update():
     idx_dict = {}
+    t_start = time.time()
 
     for line in cidian:
         if line:
             tap = line.find('\t') + 1
             key_CHT, key_CHS = line[0], line[tap]
+            key = key_CHT + key_CHS
 
-            if (key_CHT, key_CHS) not in idx_dict:
-                idx_dict[(key_CHT, key_CHS)] = idx(key_CHT, key_CHS)
+            if key not in idx_dict:
+                idx_dict[key] = idx(key_CHT, key_CHS)
 
     with open(IDX_PATH, 'w', encoding='utf-8') as f:
-        f.write(str(idx_dict))
-        print("Index table updated")
+        json.dump(idx_dict, f, ensure_ascii=False, indent=4)
+        interval = '{0:.3f}'.format(time.time() - t_start)
+        print("Index table updated (" + str(interval) + " seconds)")
+
+idx_update()

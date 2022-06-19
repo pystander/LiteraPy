@@ -36,7 +36,7 @@ def analyse(txt: str, fq_mode: bool=False, check_dict: bool=False):
 
     # Match dictionary words
     if check_dict:
-        result = checklist(list(itertools.chain(*result)))
+        result = checkdict(list(itertools.chain(*result)))
     else:
         result = list(itertools.chain(*result))
 
@@ -53,12 +53,12 @@ def analyse(txt: str, fq_mode: bool=False, check_dict: bool=False):
     print("Time interval: " + str(interval) + " seconds")
     return result
 
-def checklist(clauses: list):
+def checkdict(clauses: list):
     cklist = []
 
     # Check if phrase in dict
     for i in clauses:
-        if search(i):
+        if i in search(i):
             cklist.append(i)
 
     return cklist
