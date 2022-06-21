@@ -13,47 +13,43 @@ with open(DICT_PATH, 'r', encoding='utf-8') as f:
     print("Cidian loaded")
 
 # Node
-class Node:
+class TrieNode:
     def __init__(self):
-        self.child = collections.defaultdict(Node)
-        self.char = ""
+        self.child = collections.defaultdict(TrieNode)
         self.is_word = False
 
 # Trie
 class Trie:
     def __init__(self):
-        self.root = Node()
+        self.root = TrieNode()
 
     def insert(self, word: str):
-        cur = self.root
+        node = self.root
 
         for char in word:
-            if char not in cur.child:
-                cur.child[char] = Node()
+            if char not in node.child:
+                node.child[char] = TrieNode()
 
-            cur = cur.child[char]
-
-        cur.char = word
-        cur.is_word = True
+        node.is_word = True
 
     def search(self, word):
-        cur = self.root
+        node = self.root
 
         for char in word:
-            if char not in cur.child:
-                return False
-            else:
-                cur = cur.child[char]
+            node = node.child.get(char)
 
-        return cur.char
+            if not node:
+                return False
+
+        return node.is_word
 
     def start_wtih(self, prefix):
-        cur = self.root
+        node = self.root
 
         for char in prefix:
-            if char not in cur.child:
+            node = node.child.get(char)
+
+            if not node:
                 return False
-            else:
-                cur = cur.child[char]
 
         return True
