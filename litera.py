@@ -32,7 +32,6 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
         for key in idx_dict:
             if word in key:
                 start, end = idx_dict[key]
-                print("Index existed")
                 break
 
         for line in cidian[start:end]:

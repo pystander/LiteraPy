@@ -18,6 +18,7 @@ with open(IDX_PATH, 'r', encoding='utf-8') as f:
     idx_dict = json.load(f)
     print("Search index loaded")
 
+# Dictionary modifier
 def dmod(mode: str='r', data: str=''):
     # Initialize
     if mode == 'i':
@@ -98,5 +99,3 @@ def idx_update():
         json.dump(idx_dict, f, ensure_ascii=False, indent=4)
         interval = '{0:.3f}'.format(time.time() - t_start)
         print("Index table updated (" + str(interval) + " seconds)")
-
-idx_update()
