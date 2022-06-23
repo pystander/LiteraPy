@@ -38,7 +38,7 @@ class Trie:
 
         node.is_end = True
 
-    def search(self, word: str):
+    def find(self, word: str):
         node = self.root
 
         for char in word:
@@ -82,13 +82,31 @@ class Trie:
             self.dfs(child, prefix + node.char)
 
     # Build trie by dict
-    def build_trie(self, dict_list: list=cidian, delimiter: str='\t'):
+    def build_trie(self, dict_list: list=cidian, delimiter: str='\t', lang: str='zh-CHT'):
         t_start = time.time()
 
-        for line in dict_list:
-            chunks = line.split(delimiter)
-            self.insert(chunks[0])
-            self.insert(chunks[1])
+        if lang == 'zh-CHT':
+            for line in dict_list:
+                chunks = line.split(delimiter)
+                self.insert(chunks[0])
 
-        interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Trie updated (" + str(interval) + " seconds)")
+            interval = '{0:.3f}'.format(time.time() - t_start)
+            print("CHT Trie built (" + str(interval) + " seconds)")
+
+        elif lang == 'zh-CHS':
+            for line in dict_list:
+                chunks = line.split(delimiter)
+                self.insert(chunks[1])
+
+            interval = '{0:.3f}'.format(time.time() - t_start)
+            print("CHT Trie built (" + str(interval) + " seconds)")
+
+    def print_trie(self):
+        self.dfs_print(self.root, "")
+
+    def dfs_print(self, node: TrieNode, prefix: str):
+        if node.is_end:
+            print(prefix + node.char)
+
+        for child in node.child.values():
+            self.dfs_print(child, prefix + node.char)

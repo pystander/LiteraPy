@@ -10,21 +10,22 @@ from trie import Trie
 DICT_PATH = 'dict/dict.txt'
 IDX_PATH = 'dict/index.json'
 
-# Load dictionary and index table
-with open(DICT_PATH, 'r', encoding='utf-8') as f:
-    cidian = [line.rstrip('\n') for line in f]
-    print("Cidian loaded")
+# Load dictionary
+try:
+    with open(DICT_PATH, 'r', encoding='utf-8') as f:
+        cidian = [line.rstrip('\n') for line in f]
+        print("Cidian loaded")
 
-with open(IDX_PATH, 'r', encoding='utf-8') as f:
-    idx_dict = json.load(f)
-    print("Index table loaded")
+except FileNotFoundError:
+    print("Dictionary not found")
+    exit(1)
 
 # Build trie by dict
-dict_trie = Trie()
-dict_trie.build_trie(dict_list=cidian)
+trie_cht = Trie().build_trie(lang='zh-CHT')
+trie_chs = Trie().build_trie(lang='zh-CHS')
 
 # Define functions
-def search(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: str='\t'):
+def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
     # Empty input
     if not word:
         return None
@@ -34,29 +35,20 @@ def search(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: str
 
     # Try search by index; else search all
     try:
-        for key in idx_dict:
-            if word in key:
-                start, end = idx_dict[key]
-                break
-
-        for line in dict_list[start:end]:
-            chunks = line.split(delimiter)
-
-            # zh-CHT
-            if lang == 'zh-CHT':
-                matched.append(chunks[0])
-            # zh-CHS
-            elif lang == 'zh-CHS':
-                matched.append(chunks[1])
+        if lang == 'zh-CHT':
+            matched = trie_cht.prefix_search(word)
+        elif lang == 'zh-CHS':
+            matched = trie_chs.prefix_search(word)
 
     except:
-        for line in dict_list:
+        for line in cidian:
             chunks = line.split(delimiter)
 
             # zh-CHT
             if lang == 'zh-CHT':
                 if chunks[0].startswith(word):
                     matched.append(chunks[0])
+
             # zh-CHS
             elif lang == 'zh-CHS':
                 if chunks[1].startswith(word):
@@ -74,7 +66,7 @@ def search(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: str
         print("No matched record")
         return None
 
-def adsearch(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: str='\t'):
+def adsearch(word: str, lang: str='zh-CHT', delimiter: str='\t'):
     # Empty input
     if not word:
         return None
@@ -83,7 +75,7 @@ def adsearch(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: s
     t_start = time.time()
 
     # Cidian
-    for line in dict_list:
+    for line in cidian:
         chunks = line.split(delimiter)
 
         # zh-CHT
@@ -107,7 +99,7 @@ def adsearch(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: s
         print("No matched record")
         return None
 
-def pinyin(word: str, dict_list: list=cidian):
+def pinyin(word: str, delimiter: str='\t'):
     if word == "":
         return None
 
@@ -115,13 +107,11 @@ def pinyin(word: str, dict_list: list=cidian):
     t_start = time.time()
 
     # Search whole phrase in Cidian
-    for line in dict_list:
-        tap = line.find('\t') + 1
-        tap2 = line[tap:].find('\t')
+    for line in cidian:
+        chunks = line.split('\t')
 
-        if line.startswith(word + '\t') or word == line[tap:tap+tap2]:
-            result = line[tap+tap2+1:]
-            break
+        if chunks[0] == word or chunks[1] == word:
+            result = chunks[2]
 
     # Output search results
     if result:
@@ -131,6 +121,3 @@ def pinyin(word: str, dict_list: list=cidian):
     else:
         print("No matched record")
         return None
-
-def prefix_search(word: str, trie: Trie=dict_trie):
-    return dict_trie.prefix_search(word)
