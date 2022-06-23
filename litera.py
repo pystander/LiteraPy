@@ -5,6 +5,7 @@
 # Import libraries
 import time
 import json
+from trie import Trie
 
 DICT_PATH = 'dict/dict.txt'
 IDX_PATH = 'dict/index.json'
@@ -18,8 +19,12 @@ with open(IDX_PATH, 'r', encoding='utf-8') as f:
     idx_dict = json.load(f)
     print("Index table loaded")
 
+# Build trie by dict
+dict_trie = Trie()
+dict_trie.build_trie(dict_list=cidian)
+
 # Define functions
-def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
+def search(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: str='\t'):
     # Empty input
     if not word:
         return None
@@ -34,7 +39,7 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
                 start, end = idx_dict[key]
                 break
 
-        for line in cidian[start:end]:
+        for line in dict_list[start:end]:
             chunks = line.split(delimiter)
 
             # zh-CHT
@@ -45,7 +50,7 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
                 matched.append(chunks[1])
 
     except:
-        for line in cidian:
+        for line in dict_list:
             chunks = line.split(delimiter)
 
             # zh-CHT
@@ -69,7 +74,7 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
         print("No matched record")
         return None
 
-def adsearch(word: str, lang: str='zh-CHT', delimiter: str='\t'):
+def adsearch(word: str, dict_list: list=cidian, lang: str='zh-CHT', delimiter: str='\t'):
     # Empty input
     if not word:
         return None
@@ -78,7 +83,7 @@ def adsearch(word: str, lang: str='zh-CHT', delimiter: str='\t'):
     t_start = time.time()
 
     # Cidian
-    for line in cidian:
+    for line in dict_list:
         chunks = line.split(delimiter)
 
         # zh-CHT
@@ -102,7 +107,7 @@ def adsearch(word: str, lang: str='zh-CHT', delimiter: str='\t'):
         print("No matched record")
         return None
 
-def pinyin(word: str):
+def pinyin(word: str, dict_list: list=cidian):
     if word == "":
         return None
 
@@ -110,7 +115,7 @@ def pinyin(word: str):
     t_start = time.time()
 
     # Search whole phrase in Cidian
-    for line in cidian:
+    for line in dict_list:
         tap = line.find('\t') + 1
         tap2 = line[tap:].find('\t')
 
@@ -126,3 +131,6 @@ def pinyin(word: str):
     else:
         print("No matched record")
         return None
+
+def prefix_search(word: str, trie: Trie=dict_trie):
+    return dict_trie.prefix_search(word)

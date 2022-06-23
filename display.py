@@ -23,8 +23,8 @@ class UI(QMainWindow):
         self.lang_chs.stateChanged.connect(self.lang_state)
 
     def input_search(self, text):
-        result = litera.search(text, self.lang)
-        adresult = litera.adsearch(text, self.lang)
+        result = litera.search(text, lang=self.lang)
+        adresult = litera.adsearch(text, lang=self.lang)
 
         if result != None:
             self.search_browser.setText('\n'.join(result))

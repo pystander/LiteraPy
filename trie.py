@@ -4,12 +4,11 @@
 
 # Import libraries
 import collections
-from distutils.command.build import build
 import time
 
 DICT_PATH = 'dict/dict.txt'
 
-# Load dictionary and trie
+# Load dictionary
 with open(DICT_PATH, 'r', encoding='utf-8') as f:
     cidian = [line.rstrip('\n') for line in f]
     print("Cidian loaded")
