@@ -18,7 +18,7 @@ class TrieNode:
     def __init__(self, char: str):
         self.child = collections.defaultdict(TrieNode)
         self.char = char
-        self.is_end = False
+        self.is_word = False
 
 # Trie
 class Trie:
@@ -36,9 +36,9 @@ class Trie:
                 node.child[char] = new_node
                 node = new_node
 
-        node.is_end = True
+        node.is_word = True
 
-    def find(self, word: str):
+    def find_word(self, word: str):
         node = self.root
 
         for char in word:
@@ -47,9 +47,9 @@ class Trie:
             if not node:
                 return False
 
-        return node.is_end
+        return node.is_word
 
-    def start_wtih(self, prefix: str):
+    def prefix(self, prefix: str):
         node = self.root
 
         for char in prefix:
@@ -75,7 +75,7 @@ class Trie:
         return self.result
 
     def dfs(self, node: TrieNode, prefix: str):
-        if node.is_end:
+        if node.is_word:
             self.result.append((prefix + node.char))
 
         for child in node.child.values():
@@ -101,12 +101,4 @@ class Trie:
             interval = '{0:.3f}'.format(time.time() - t_start)
             print("CHT Trie built (" + str(interval) + " seconds)")
 
-    def print_trie(self):
-        self.dfs_print(self.root, "")
-
-    def dfs_print(self, node: TrieNode, prefix: str):
-        if node.is_end:
-            print(prefix + node.char)
-
-        for child in node.child.values():
-            self.dfs_print(child, prefix + node.char)
+        return self
