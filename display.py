@@ -9,6 +9,7 @@ from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 UI_PATH = 'interface.ui'
+DMOD_PATH = 'dmod.ui'
 
 class UI(QMainWindow):
     def __init__(self):
@@ -19,12 +20,15 @@ class UI(QMainWindow):
         self.lang = 'zh-CHT'
 
         # Events
-        self.input.textChanged[str].connect(self.input_search)
+        self.search_input.textChanged[str].connect(self.input_search)
         self.lang_chs.stateChanged.connect(self.lang_state)
+        self.dmod_action.triggered.connect(self.dmod_open)
 
-    def input_search(self, text):
-        result = litera.search(text, lang=self.lang)
-        adresult = litera.adsearch(text, lang=self.lang)
+        self.show()
+
+    def input_search(self, word: str):
+        result = litera.search(word, lang=self.lang)
+        adresult = litera.adsearch(word, lang=self.lang)
 
         if result != None:
             self.search_browser.setText('\n'.join(result))
@@ -46,8 +50,31 @@ class UI(QMainWindow):
         if event.key() == QtCore.Qt.Key_Escape:
             self.close()
 
+    def dmod_open(self):
+        self.dmod = DM()
+        self.dmod.show()
+
+class DM(QMainWindow):
+    def __init__(self):
+        # Load .ui file and elements
+        super(DM, self).__init__()
+        uic.loadUi(DMOD_PATH, self)
+
+        # Events
+        self.cht_input.textChanged[str].connect(self.find_dup)
+        self.chs_input.textChanged[str].connect(self.find_dup)
+
+        self.show()
+
+    def find_dup(self, word: str):
+        is_found = litera.trie_cht.find_word(word)
+
+        if is_found:
+            cht, chs = litera.ch_pair(word)
+            self.cht_input.setText(cht)
+            self.chs_input.setText(chs)
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = UI()
-    window.show()
     sys.exit(app.exec_())

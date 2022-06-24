@@ -109,13 +109,27 @@ def pinyin(word: str, delimiter: str='\t'):
         chunks = line.split('\t')
 
         if chunks[0] == word or chunks[1] == word:
-            result = chunks[2]
+            interval = '{0:.3f}'.format(time.time() - t_start)
+            print("Record found (" + str(interval) + " seconds)")
+            return chunks[2]
 
-    # Output search results
-    if result:
-        interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Record found (" + str(interval) + " seconds)")
-        return result
-    else:
-        print("No matched record")
+    print("No matched record")
+    return None
+
+def ch_pair(word: str, delimiter: str='\t'):
+    if word == "":
         return None
+
+    t_start = time.time()
+
+    # Search whole phrase in Cidian
+    for line in cidian:
+        chunks = line.split('\t')
+
+        if chunks[0] == word or chunks[1] == word:
+            interval = '{0:.3f}'.format(time.time() - t_start)
+            print("Record found (" + str(interval) + " seconds)")
+            return chunks[0], chunks[1]
+
+    print("No matched record")
+    return None

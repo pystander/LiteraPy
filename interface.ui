@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>litera_window</class>
+ <widget class="QMainWindow" name="litera_window">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
-    <height>576</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Litera</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="input">
+   <widget class="QLineEdit" name="search_input">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -39,7 +39,7 @@
       <x>400</x>
       <y>50</y>
       <width>381</width>
-      <height>471</height>
+      <height>491</height>
      </rect>
     </property>
     <property name="font">
@@ -55,7 +55,7 @@
       <x>10</x>
       <y>50</y>
       <width>381</width>
-      <height>471</height>
+      <height>491</height>
      </rect>
     </property>
     <property name="font">
@@ -90,12 +90,29 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>798</width>
+     <width>800</width>
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="dmod_action"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionDictionary_Modifier">
+   <property name="text">
+    <string>Dictionary Modifier</string>
+   </property>
+  </action>
+  <action name="dmod_action">
+   <property name="text">
+    <string>Dictionary Modifier</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

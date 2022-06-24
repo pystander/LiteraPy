@@ -81,8 +81,8 @@ class Trie:
         for child in node.child.values():
             self.dfs(child, prefix + node.char)
 
-    # Build trie by dict
-    def build_trie(self, dict_list: list=cidian, delimiter: str='\t', lang: str='zh-CHT'):
+    # Update trie by dict
+    def update(self, dict_list: list=cidian, delimiter: str='\t', lang: str='zh-CHT'):
         t_start = time.time()
 
         if lang == 'zh-CHT':
