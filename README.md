@@ -21,7 +21,7 @@ For further enquiries, please feel free to contact me on GitHub via [Issues](htt
 
 ## Installation
 
-``LiteraPy`` is developed and works under [Python](https://www.python.org/) 3.7
+``LiteraPy`` is developed and works under [Python3](https://www.python.org/)
 
 <br/>
 
