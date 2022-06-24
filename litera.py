@@ -4,11 +4,9 @@
 
 # Import libraries
 import time
-import json
 from trie import Trie
 
 DICT_PATH = 'dict/dict.txt'
-IDX_PATH = 'dict/index.json'
 
 # Load dictionary
 try:
@@ -33,7 +31,7 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
     matched = []
     t_start = time.time()
 
-    # Try search by index; else search all
+    # Try prefix search by trie; else search whole dict
     try:
         if lang == 'zh-CHT':
             matched = trie_cht.prefix_search(word)
