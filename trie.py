@@ -9,21 +9,25 @@ import time
 DICT_PATH = 'dict/dict.txt'
 
 # Load dictionary
-with open(DICT_PATH, 'r', encoding='utf-8') as f:
-    cidian = [line.rstrip('\n') for line in f]
-    print("Cidian loaded")
+try:
+    with open(DICT_PATH, 'r', encoding='utf-8') as f:
+        cidian = [line.rstrip('\n') for line in f]
+        print("Cidian loaded")
+
+except FileNotFoundError:
+    print("Dictionary not found")
+    exit(1)
 
 # Node
 class TrieNode:
-    def __init__(self, char: str):
+    def __init__(self):
         self.child = collections.defaultdict(TrieNode)
-        self.char = char
         self.is_word = False
 
 # Trie
 class Trie:
     def __init__(self):
-        self.root = TrieNode("")
+        self.root = TrieNode()
 
     def insert(self, word: str):
         node = self.root
@@ -32,7 +36,7 @@ class Trie:
             if char in node.child:
                 node = node.child[char]
             else:
-                new_node = TrieNode(char)
+                new_node = TrieNode()
                 node.child[char] = new_node
                 node = new_node
 

@@ -4,23 +4,11 @@
 
 # Import libraries
 import time
-from trie import Trie
+import trie
 
-DICT_PATH = 'dict/dict.txt'
-
-# Load dictionary
-try:
-    with open(DICT_PATH, 'r', encoding='utf-8') as f:
-        cidian = [line.rstrip('\n') for line in f]
-        print("Cidian loaded")
-
-except FileNotFoundError:
-    print("Dictionary not found")
-    exit(1)
-
-# Build trie by dict
-trie_cht = Trie().build_trie(lang='zh-CHT')
-trie_chs = Trie().build_trie(lang='zh-CHS')
+# Build trie
+trie_cht = trie.Trie().build_trie(lang='zh-CHT')
+trie_chs = trie.Trie().build_trie(lang='zh-CHS')
 
 # Define functions
 def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
@@ -34,12 +22,12 @@ def search(word: str, lang: str='zh-CHT', delimiter: str='\t'):
     # Try prefix search by trie; else search whole dict
     try:
         if lang == 'zh-CHT':
-            matched = trie_cht.prefix_search(word)
+            matched = trie.trie_cht.prefix_search(word)
         elif lang == 'zh-CHS':
-            matched = trie_chs.prefix_search(word)
+            matched = trie.trie_chs.prefix_search(word)
 
     except:
-        for line in cidian:
+        for line in trie.cidian:
             chunks = line.split(delimiter)
 
             # zh-CHT
@@ -73,7 +61,7 @@ def adsearch(word: str, lang: str='zh-CHT', delimiter: str='\t'):
     t_start = time.time()
 
     # Cidian
-    for line in cidian:
+    for line in trie.cidian:
         chunks = line.split(delimiter)
 
         # zh-CHT
@@ -101,11 +89,10 @@ def pinyin(word: str, delimiter: str='\t'):
     if word == "":
         return None
 
-    result = ""
     t_start = time.time()
 
     # Search whole phrase in Cidian
-    for line in cidian:
+    for line in trie.cidian:
         chunks = line.split('\t')
 
         if chunks[0] == word or chunks[1] == word:
@@ -123,13 +110,13 @@ def ch_pair(word: str, delimiter: str='\t'):
     t_start = time.time()
 
     # Search whole phrase in Cidian
-    for line in cidian:
-        chunks = line.split('\t')
+    for line in trie.cidian:
+        chunks = line.split(delimiter)
 
         if chunks[0] == word or chunks[1] == word:
             interval = '{0:.3f}'.format(time.time() - t_start)
             print("Record found (" + str(interval) + " seconds)")
-            return chunks[0], chunks[1]
+            return chunks[0], chunks[1], chunks[2]
 
     print("No matched record")
     return None
