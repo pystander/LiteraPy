@@ -60,19 +60,57 @@ class DM(QMainWindow):
         super(DM, self).__init__()
         uic.loadUi(DMOD_PATH, self)
 
+        self.init()
+
         # Events
         self.cht_input.textChanged[str].connect(self.find_dup)
         self.chs_input.textChanged[str].connect(self.find_dup)
+        self.add_button.clicked.connect(self.add_word)
+        self.clear_button.clicked.connect(self.clear)
+        self.reset_button.clicked.connect(self.reset)
 
         self.show()
+    
+    def init(self):
+        self.dmod_temp = ""
+        self.preview = "模式\t繁體\t簡體\t拼音\n"
+        self.dmod_browser.setText(self.preview)
 
     def find_dup(self, word: str):
-        is_found = litera.trie_cht.find_word(word)
+        is_found_cht = litera.trie_cht.find_word(word)
+        is_found_chs = litera.trie_chs.find_word(word)
 
-        if is_found:
-            cht, chs = litera.ch_pair(word)
+        if is_found_cht or is_found_chs:
+            cht, chs, pinyin = litera.ch_pair(word)
             self.cht_input.setText(cht)
             self.chs_input.setText(chs)
+            self.pinyin_input.setText(pinyin)
+            return True
+
+        return False
+
+    def add_word(self):
+        if self.find_dup(self.cht_input.text()) or self.find_dup(self.chs_input.text()):
+            print("Word existed")
+            return
+
+        cht = self.cht_input.text()
+        chs = self.chs_input.text()
+        pinyin = self.pinyin_input.text()
+
+        line = cht + '\t' + chs + '\t' + pinyin
+        self.dmod_temp += line + '\n'
+        self.preview += '+' + '\t' + line + '\n'
+        self.dmod_browser.setText(self.preview)
+
+    def clear(self):
+        self.cht_input.setText("")
+        self.chs_input.setText("")
+        self.pinyin_input.setText("")
+
+    def reset(self):
+        self.clear()
+        self.init()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

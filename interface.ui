@@ -37,9 +37,9 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>50</y>
+      <y>90</y>
       <width>381</width>
-      <height>491</height>
+      <height>451</height>
      </rect>
     </property>
     <property name="font">
@@ -53,9 +53,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>90</y>
       <width>381</width>
-      <height>491</height>
+      <height>451</height>
      </rect>
     </property>
     <property name="font">
@@ -82,6 +82,44 @@
     </property>
     <property name="text">
      <string>zh-CHS</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="preview_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>前綴搜尋</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="preview_label_2">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>50</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>完整搜尋</string>
     </property>
    </widget>
   </widget>
