@@ -5,6 +5,7 @@
 # Import libraries
 import sys
 import litera
+import dict
 from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
@@ -68,12 +69,12 @@ class DM(QMainWindow):
         self.add_button.clicked.connect(self.add_word)
         self.clear_button.clicked.connect(self.clear)
         self.reset_button.clicked.connect(self.reset)
+        self.apply_button.clicked.connect(self.apply)
 
         self.show()
     
     def init(self):
         self.dmod_temp = ""
-        self.preview = "模式\t繁體\t簡體\t拼音\n"
         self.dmod_browser.setText(self.preview)
 
     def find_dup(self, word: str):
@@ -100,8 +101,12 @@ class DM(QMainWindow):
 
         line = cht + '\t' + chs + '\t' + pinyin
         self.dmod_temp += line + '\n'
-        self.preview += '+' + '\t' + line + '\n'
-        self.dmod_browser.setText(self.preview)
+        self.dmod_browser.setText(self.dmod_temp)
+
+    def delete_word(self):
+        if not (self.find_dup(self.cht_input.text()) or self.find_dup(self.chs_input.text())):
+            print("Word not existed")
+            return
 
     def clear(self):
         self.cht_input.setText("")
@@ -111,6 +116,14 @@ class DM(QMainWindow):
     def reset(self):
         self.clear()
         self.init()
+
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+            self.close()
+
+    def apply(self):
+        dict.dmod(mode='a', data=self.dmod_temp)
+        self.reset()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

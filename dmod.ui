@@ -125,7 +125,7 @@
      <string>修改預覽</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="confirm_button">
+   <widget class="QPushButton" name="apply_button">
     <property name="geometry">
      <rect>
       <x>680</x>
@@ -144,30 +144,11 @@
      <string>確定修改</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="delete_button">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>210</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>刪除字詞</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="clear_button">
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>250</y>
+      <y>210</y>
       <width>111</width>
       <height>31</height>
      </rect>
