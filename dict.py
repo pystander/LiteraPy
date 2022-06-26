@@ -7,16 +7,6 @@ import time
 import json
 
 DICT_PATH = 'dict/dict.txt'
-IDX_PATH = 'dict/index.json'
-
-# Load dictionary and index table
-with open(DICT_PATH, 'r', encoding='utf-8') as f:
-    cidian = [line.rstrip('\n') for line in f]
-    print("Cidian loaded")
-
-with open(IDX_PATH, 'r', encoding='utf-8') as f:
-    idx_dict = json.load(f)
-    print("Search index loaded")
 
 # Dictionary modifier
 def dmod(mode: str='r', data: str=''):
@@ -31,14 +21,24 @@ def dmod(mode: str='r', data: str=''):
         with open(DICT_PATH, 'r', encoding='utf-8') as f:
             return f.read()
 
-    # Write / Append
-    elif mode == 'w' or mode == 'a':
+    # Write
+    elif mode == 'w':
         if data == "":
             print("Missing line to be added")
-            return None
+            return
 
-        with open(DICT_PATH, mode, encoding='utf-8') as f:
-            f.write(data + '\n')
+        with open(DICT_PATH, 'w', encoding='utf-8') as f:
+            f.write(data)
+            print("Dictionary updated")
+
+    # Append
+    elif mode == 'a':
+        if data == "":
+            print("Missing line to be added")
+            return
+
+        with open(DICT_PATH, 'a', encoding='utf-8') as f:
+            f.write('\n' + data)
             print("Dictionary updated")
 
 def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
@@ -60,42 +60,3 @@ def parser(dict_list: list, delimiter: str, new_delimiter: str='\t'):
 
     interval = '{0:.3f}'.format(time.time() - t_start)
     print("Dictionary file updated (" + str(interval) + " seconds)")
-
-def idx(word_CHT: str, word_CHS: str):
-    start = end = 0
-
-    # Start index
-    for i, line in enumerate(cidian):
-        tap = line.find('\t') + 1
-
-        if line.startswith(word_CHT) and line[tap:].startswith(word_CHS):
-            start = i
-            break
-
-    # End index
-    for i, line in enumerate(cidian[start:]):
-        tap = line.find('\t') + 1
-
-        if not line.startswith(word_CHT) or not line[tap:].startswith(word_CHS):
-            end = start + i
-            break
-
-    return start, end
-
-def idx_update():
-    idx_dict = {}
-    t_start = time.time()
-
-    for line in cidian:
-        if line:
-            tap = line.find('\t') + 1
-            key_CHT, key_CHS = line[0], line[tap]
-            key = key_CHT + key_CHS
-
-            if key not in idx_dict:
-                idx_dict[key] = idx(key_CHT, key_CHS)
-
-    with open(IDX_PATH, 'w', encoding='utf-8') as f:
-        json.dump(idx_dict, f, ensure_ascii=False, indent=4)
-        interval = '{0:.3f}'.format(time.time() - t_start)
-        print("Index table updated (" + str(interval) + " seconds)")
