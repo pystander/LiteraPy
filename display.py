@@ -9,8 +9,8 @@ import dict
 from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
-UI_PATH = 'interface.ui'
-DMOD_PATH = 'dmod.ui'
+UI_PATH = 'ui/interface.ui'
+DMOD_PATH = 'ui/dmod.ui'
 
 class UI(QMainWindow):
     def __init__(self):
@@ -72,10 +72,10 @@ class DM(QMainWindow):
         self.apply_button.clicked.connect(self.apply)
 
         self.show()
-    
+
     def init(self):
         self.dmod_temp = ""
-        self.dmod_browser.setText(self.preview)
+        self.dmod_browser.setText(self.dmod_temp)
 
     def find_dup(self, word: str):
         is_found_cht = litera.trie_cht.find_word(word)
